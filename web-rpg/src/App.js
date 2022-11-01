@@ -3,13 +3,15 @@ import "./App.css";
 import Toggle from "./Toggle";
 import Clock from "./Clock";
 import LoginControl from "./LoginControl";
+import { Mailbox } from "./LoginControl";
+import Page from "./Page";
+
+const messages = [1, 1, 2, 4];
 
 function App() {
   return (
     <div className='Toggle'>
-      <Toggle />
-      <Clock />
-      <LoginControl />
+      <Page />
     </div>
   );
 }

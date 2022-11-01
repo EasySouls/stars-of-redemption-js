@@ -1,14 +1,14 @@
 import React from "react";
 
-function UserGreeting(props) {
+export function UserGreeting(props) {
   return <h1>Welcome back!</h1>;
 }
 
-function GuestGreeting(props) {
+export function GuestGreeting(props) {
   return <h1>Please sign in!</h1>;
 }
 
-function Greeting(props) {
+export function Greeting(props) {
   const isLoggedIn = props.isLoggedIn;
   if (isLoggedIn) {
     return <UserGreeting />;
@@ -16,11 +16,11 @@ function Greeting(props) {
   return <GuestGreeting />;
 }
 
-function LoginButton(props) {
+export function LoginButton(props) {
   return <button onClick={props.onClick}>Login</button>;
 }
 
-function LogoutButton(props) {
+export function LogoutButton(props) {
   return <button onClick={props.onClick}>Logout</button>;
 }
 
@@ -56,6 +56,18 @@ class LoginControl extends React.Component {
       </div>
     );
   }
+}
+
+export function Mailbox(props) {
+  const unreadMessages = props.unreadMessages;
+  return (
+    <div>
+      <h1>Hello!</h1>
+      {unreadMessages.length > 0 && (
+        <h2>You have {unreadMessages.length} unread messages.</h2>
+      )}
+    </div>
+  );
 }
 
 export default LoginControl;
