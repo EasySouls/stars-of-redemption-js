@@ -1,9 +1,12 @@
 import "./App.css";
-import Clock from "./Clock";
-// import { NameForm, EssayForm, FlavorForm, Reservation } from "./Forms";
+import { Calculator } from "./Forms";
 
 function App() {
-  return <div className='App'></div>;
+  return (
+    <div className='App'>
+      <Calculator />
+    </div>
+  );
 }
 
 export default App;
