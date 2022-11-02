@@ -1,15 +1,15 @@
 import "./App.css";
 import React, { useState } from "react";
 import ChangeThemeButton from "./ChangeThemeButton";
+import lightIcon from "./icons/light-icon.png";
+import darkIcon from "./icons/dark-icon.png";
 
 function App() {
-  const lightIcon = "./sun.png";
-  const darkIcon = "text-rpg/icons/night-mode.png";
-
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
-    icon: lightIcon,
+    icon: darkIcon,
   });
+
   const themeStyles = {
     backgroundColor: darkTheme.enabled ? "black" : "white",
     color: darkTheme.enabled ? "white" : "black",
@@ -19,14 +19,14 @@ function App() {
     setDarkTheme((prevTheme) => {
       return {
         enabled: !prevTheme.enabled,
-        icon: !prevTheme.enabled ? darkIcon : lightIcon,
+        icon: !prevTheme.enabled ? lightIcon : darkIcon,
       };
     });
   }
 
   return (
     <div className='App' style={themeStyles}>
-      {/* <ChangeThemeButton onClick={changeTheme} theme={darkTheme.enabled} /> */}
+      <ChangeThemeButton onClick={changeTheme} icon={darkTheme.icon} />
     </div>
   );
 }
