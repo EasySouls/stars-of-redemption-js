@@ -1,10 +1,25 @@
-.App {
-  text-align: center;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.App-logo {
+.App {
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.change-theme-btn {
+  background-color: black;
+  cursor: pointer;
+  border-radius: 20px;
+  size: 20px 20px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
