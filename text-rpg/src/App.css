@@ -4,10 +4,30 @@
   box-sizing: border-box;
 }
 
-.App {
+.game {
   width: 100vw;
   height: 100vh;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.main-screen {
+  padding: 3px;
+  width: 80vw;
+  height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  width: 20vw;
+  height: 100vh;
+}
+
+.information-panel {
+  height: 70vh;
 }
 
 .theme-icon-container {
