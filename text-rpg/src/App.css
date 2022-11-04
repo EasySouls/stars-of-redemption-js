@@ -18,6 +18,14 @@
   height: 100vh;
 }
 
+.character-screen {
+  margin: 5px;
+}
+
+.character-screen h1 {
+  text-align: center;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;

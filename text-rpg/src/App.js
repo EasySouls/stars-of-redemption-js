@@ -1,32 +1,28 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import Sidebar from "./Sidebar";
 import lightIcon from "./icons/light-icon.png";
 import darkIcon from "./icons/dark-icon.png";
 import MainScreen from "./MainScreen";
 
-class Character {
-  name = "Bob";
+export const CharacterContext = createContext();
 
-  attributes = {
-    strenght: 0,
+function App() {
+  const [character, setCharacter] = useState({
+    name: "Bob",
+    hp: 0,
+    hpMax: 0,
+    encumbrence: 0,
+    encumbrenceMax: 0,
+    strength: 0,
     dexterity: 0,
     constitution: 0,
     intelligence: 0,
     wisdom: 0,
     charisma: 0,
-  };
-
-  values = {
-    hp: 0,
-    hpMax: 0,
-    encumbrence: 0,
-    encumbrenceTotal: 0,
-  };
-}
-
-function App() {
-  const [character, setCharacter] = useState(new Character());
+    exp: 0,
+    expNext: 0,
+  });
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
@@ -63,13 +59,15 @@ function App() {
 
   return (
     <div className='game' style={themeStyles}>
-      <Sidebar
-        changeTheme={changeTheme}
-        themeIcon={darkTheme.icon}
-        character={character}
-        borderStyle={borderStyle}
-      />
-      <MainScreen character={character} borderStyle={borderStyle2} />
+      <CharacterContext.Provider value={{ character, setCharacter }}>
+        <Sidebar
+          changeTheme={changeTheme}
+          themeIcon={darkTheme.icon}
+          character={character}
+          borderStyle={borderStyle}
+        />
+        <MainScreen character={character} borderStyle={borderStyle2} />
+      </CharacterContext.Provider>
     </div>
   );
 }
