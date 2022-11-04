@@ -26,6 +26,17 @@
   text-align: center;
 }
 
+.character-screen-attributes {
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.attribute-item {
+  border: solid 1px black;
+  width: 15rem;
+  height: 10rem;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
