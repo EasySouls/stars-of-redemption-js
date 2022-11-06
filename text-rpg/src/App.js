@@ -6,6 +6,9 @@ import darkIcon from "./icons/dark-icon.png";
 import MainScreen from "./MainScreen";
 
 export const CharacterContext = createContext();
+export const ThemeContext = createContext();
+
+//! Bug: changing theme after changing the character name makes the page crash
 
 function App() {
   const [character, setCharacter] = useState({
@@ -35,6 +38,10 @@ function App() {
   };
 
   const borderStyle = {
+    border: darkTheme.enabled ? "solid 1px white" : "solid 1px black",
+  };
+
+  const borderStyle1 = {
     borderTop: darkTheme.enabled ? "solid 3px white" : "solid 3px black",
     borderRight: darkTheme.enabled ? "solid 2px white" : "solid 2px black",
     borderBottom: darkTheme.enabled ? "solid 3px white" : "solid 3px black",
@@ -59,15 +66,17 @@ function App() {
 
   return (
     <div className='game' style={themeStyles}>
-      <CharacterContext.Provider value={{ character, setCharacter }}>
-        <Sidebar
-          changeTheme={changeTheme}
-          themeIcon={darkTheme.icon}
-          character={character}
-          borderStyle={borderStyle}
-        />
-        <MainScreen character={character} borderStyle={borderStyle2} />
-      </CharacterContext.Provider>
+      <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
+        <CharacterContext.Provider value={{ character, setCharacter }}>
+          <Sidebar
+            changeTheme={changeTheme}
+            themeIcon={darkTheme.icon}
+            character={character}
+            borderStyle={borderStyle1}
+          />
+          <MainScreen borderStyle={borderStyle2} />
+        </CharacterContext.Provider>
+      </ThemeContext.Provider>
     </div>
   );
 }

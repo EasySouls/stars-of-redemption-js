@@ -13,7 +13,7 @@ export default function Sidebar({
   return (
     <div className='sidebar' style={borderStyle}>
       <ChangeThemeButton onClick={changeTheme} icon={themeIcon} />
-      <CharacterPanel character={character} />
+      <CharacterPanel />
     </div>
   );
 }

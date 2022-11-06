@@ -2,6 +2,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "Poor Story", cursive;
 }
 
 .game {
@@ -13,13 +14,16 @@
 }
 
 .main-screen {
-  padding: 3px;
   width: 80vw;
   height: 100vh;
 }
 
+.character-creation-screen {
+  margin: 1rem;
+}
+
 .character-screen {
-  margin: 5px;
+  width: inherit;
 }
 
 .character-screen h1 {
@@ -28,24 +32,27 @@
 
 .character-screen-attributes {
   display: grid;
-  grid-gap: 1rem;
+  gap: 1rem 2rem;
+  grid-auto-flow: column;
+  grid-template-columns: 15rem 15rem 15rem;
+  grid-template-rows: 10rem 10rem;
+  justify-content: space-around;
 }
 
 .attribute-item {
   border: solid 1px black;
-  width: 15rem;
-  height: 10rem;
+  padding: 0.3rem;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  padding: 3px;
+  padding: 0.5rem;
   width: 20vw;
   height: 100vh;
 }
 
-.information-panel {
+.character-panel {
   height: 70vh;
 }
 
@@ -54,7 +61,7 @@
   width: 3rem;
   height: 3rem;
   color: white;
-  margin: 3px;
+  margin: 0.5rem;
 }
 
 .change-theme-btn {

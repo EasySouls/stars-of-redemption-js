@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CharacterContext } from "./App";
 
-export default function CharacterPanel({ character }) {
+export default function CharacterPanel(props) {
+  const { character, setCharacter } = useContext(CharacterContext);
+
   return (
     <div className='character-panel'>
       {/* Make this with a much smarter way*/}
-      <b>CharacterPanel</b>
+      <b style={{ fontSize: "24px" }}>Character</b>
       <p>Name: {character.name}</p>
       <p>Strength: {character.strength}</p>
       <p>Dexterity: {character.dexterity}</p>
