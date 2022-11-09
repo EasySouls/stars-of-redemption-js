@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { CharacterContext } from "./App";
 
 export default function CharacterCreationScreen() {
@@ -8,21 +8,16 @@ export default function CharacterCreationScreen() {
 
   const { character, setCharacter } = useContext(CharacterContext);
 
-  if (status === "success") {
-    setCharacter({ ...character, name: answer });
-    return (
-      <div className='character-creation-screen'>
-        <p>Character created</p>
-      </div>
-    );
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("submitting");
     try {
       await submitForm(answer);
       setStatus("success");
+      setCharacter({
+        ...character,
+        name: answer,
+      });
     } catch (err) {
       setStatus("typing");
       setError(err);
@@ -48,23 +43,31 @@ export default function CharacterCreationScreen() {
     });
   }
 
-  return (
-    <div className='character-creation-screen'>
-      <h2>Choose the name of your character:</h2>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={answer}
-          onChange={handleTextAreaChange}
-          disabled={status === "submitting"}
-        />
-        <br />
-        <button disabled={answer.length === 0 || status === "submitting"}>
-          Create
-        </button>
-        {error !== null && (
-          <p className='create-character-error'>{error.message}</p>
-        )}
-      </form>
-    </div>
-  );
+  if (status !== "success") {
+    return (
+      <div className='character-creation-screen'>
+        <h2>Choose the name of your character:</h2>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            value={answer}
+            onChange={handleTextAreaChange}
+            disabled={status === "submitting"}
+          />
+          <br />
+          <button disabled={answer.length === 0 || status === "submitting"}>
+            Create
+          </button>
+          {error !== null && (
+            <p className='create-character-error'>{error.message}</p>
+          )}
+        </form>
+      </div>
+    );
+  } else {
+    return (
+      <div className='character-creation-screen'>
+        <p>Character created: {character.name}</p>
+      </div>
+    );
+  }
 }

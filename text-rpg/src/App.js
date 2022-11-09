@@ -10,22 +10,24 @@ export const ThemeContext = createContext();
 
 //! Bug: changing theme after changing the character name makes the page crash
 
+const initialCharacter = {
+  name: "",
+  hp: 0,
+  hpMax: 0,
+  encumbrence: 0,
+  encumbrenceMax: 0,
+  strength: 0,
+  dexterity: 0,
+  constitution: 0,
+  intelligence: 0,
+  wisdom: 0,
+  charisma: 0,
+  exp: 0,
+  expNext: 0,
+};
+
 function App() {
-  const [character, setCharacter] = useState({
-    name: "Bob",
-    hp: 0,
-    hpMax: 0,
-    encumbrence: 0,
-    encumbrenceMax: 0,
-    strength: 0,
-    dexterity: 0,
-    constitution: 0,
-    intelligence: 0,
-    wisdom: 0,
-    charisma: 0,
-    exp: 0,
-    expNext: 0,
-  });
+  const [character, setCharacter] = useState(initialCharacter);
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
