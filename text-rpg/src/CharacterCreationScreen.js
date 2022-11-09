@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
-import { CharacterContext } from "./App";
+import React, { useState, useContext } from "react";
+import { CharacterContext, GameStateContext } from "./App";
 
 export default function CharacterCreationScreen() {
   const [answer, setAnswer] = useState("");
@@ -7,6 +7,7 @@ export default function CharacterCreationScreen() {
   const [status, setStatus] = useState("typing"); // 'typing', 'submitting' or 'success'
 
   const { character, setCharacter } = useContext(CharacterContext);
+  const { gameState, setGameState } = useContext(GameStateContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,6 +23,11 @@ export default function CharacterCreationScreen() {
       setStatus("typing");
       setError(err);
     }
+  }
+
+  function nextGameState(e) {
+    e.preventDefault();
+    setGameState("character-screen");
   }
 
   function handleTextAreaChange(e) {
@@ -67,6 +73,7 @@ export default function CharacterCreationScreen() {
     return (
       <div className='character-creation-screen'>
         <p>Character created: {character.name}</p>
+        <button onClick={nextGameState}>Continue</button>
       </div>
     );
   }

@@ -7,6 +7,7 @@ import MainScreen from "./MainScreen";
 
 export const CharacterContext = createContext();
 export const ThemeContext = createContext();
+export const GameStateContext = createContext();
 
 //! Bug: changing theme after changing the character name makes the page crash
 
@@ -28,6 +29,8 @@ const initialCharacter = {
 
 function App() {
   const [character, setCharacter] = useState(initialCharacter);
+
+  const { gameState, setGameState } = useState("character-creation");
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
@@ -68,17 +71,19 @@ function App() {
 
   return (
     <div className='game' style={themeStyles}>
-      <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
-        <CharacterContext.Provider value={{ character, setCharacter }}>
-          <Sidebar
-            changeTheme={changeTheme}
-            themeIcon={darkTheme.icon}
-            character={character}
-            borderStyle={borderStyle1}
-          />
-          <MainScreen borderStyle={borderStyle2} />
-        </CharacterContext.Provider>
-      </ThemeContext.Provider>
+      <GameStateContext.Provider value={{ gameState, setGameState }}>
+        <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
+          <CharacterContext.Provider value={{ character, setCharacter }}>
+            <Sidebar
+              changeTheme={changeTheme}
+              themeIcon={darkTheme.icon}
+              character={character}
+              borderStyle={borderStyle1}
+            />
+            <MainScreen borderStyle={borderStyle2} />
+          </CharacterContext.Provider>
+        </ThemeContext.Provider>
+      </GameStateContext.Provider>
     </div>
   );
 }
