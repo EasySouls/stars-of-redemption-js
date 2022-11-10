@@ -25,8 +25,7 @@ export default function CharacterCreationScreen() {
     }
   }
 
-  function nextGameState(e) {
-    e.preventDefault();
+  function nextGameState() {
     setGameState("character-screen");
   }
 
@@ -58,6 +57,7 @@ export default function CharacterCreationScreen() {
             value={answer}
             onChange={handleTextAreaChange}
             disabled={status === "submitting"}
+            placeholder='Something like Edward Kenway or Guts'
           />
           <br />
           <button disabled={answer.length === 0 || status === "submitting"}>

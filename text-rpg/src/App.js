@@ -30,7 +30,7 @@ const initialCharacter = {
 function App() {
   const [character, setCharacter] = useState(initialCharacter);
 
-  const { gameState, setGameState } = useState("character-creation");
+  const [gameState, setGameState] = useState("character-creation");
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
