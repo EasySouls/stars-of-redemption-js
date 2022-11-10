@@ -1,13 +1,20 @@
 import React, { useState, useContext } from "react";
-import { CharacterContext, GameStateContext } from "./App";
+import { CharacterContext, GameStateContext, ThemeContext } from "./App";
 
 export default function CharacterCreationScreen() {
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("typing"); // 'typing', 'submitting' or 'success'
+  const [attributes, setAttributes] = useState([0, 0, 0, 0, 0, 0]);
 
   const { character, setCharacter } = useContext(CharacterContext);
   const { gameState, setGameState } = useContext(GameStateContext);
+  const { darkTheme } = useContext(ThemeContext);
+
+  const borderStyle = {
+    border: darkTheme.enabled ? "solid 0.2rem white" : "solid 0.2rem black",
+    borderRadius: "10px",
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -52,21 +59,72 @@ export default function CharacterCreationScreen() {
     return (
       <div className='character-creation-screen'>
         <h2>Choose the name of your character:</h2>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            value={answer}
-            onChange={handleTextAreaChange}
-            disabled={status === "submitting"}
-            placeholder='Something like Edward Kenway or Guts'
-          />
-          <br />
-          <button disabled={answer.length === 0 || status === "submitting"}>
-            Create
-          </button>
-          {error !== null && (
-            <p className='create-character-error'>{error.message}</p>
-          )}
-        </form>
+        <input
+          value={answer}
+          onChange={handleTextAreaChange}
+          disabled={status === "submitting"}
+          placeholder='Something like Edward Kenway or Guts'
+        />
+        <div className='attribute-container'>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Strength</p>
+              <br />
+              {character.strength}
+            </span>
+            <button>+1</button>
+          </div>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Dexterity</p>
+              <br />
+              {character.dexterity}
+            </span>
+            <button>+1</button>
+          </div>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Constitution</p>
+              <br />
+              {character.constitution}
+            </span>
+            <button>+1</button>
+          </div>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Intelligence</p>
+              <br />
+              {character.intelligence}
+            </span>
+            <button>+1</button>
+          </div>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Wisdom</p>
+              <br />
+              {character.wisdom}
+            </span>
+            <button>+1</button>
+          </div>
+          <div>
+            <span className='attribute' style={borderStyle}>
+              <p>Charisma</p>
+              <br />
+              {character.charisma}
+            </span>
+            <button>+1</button>
+          </div>
+        </div>
+        <br />
+        <button
+          onClick={handleSubmit}
+          disabled={answer.length === 0 || status === "submitting"}
+        >
+          Create
+        </button>
+        {error !== null && (
+          <p className='create-character-error'>{error.message}</p>
+        )}
       </div>
     );
   } else {

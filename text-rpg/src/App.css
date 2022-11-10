@@ -39,6 +39,23 @@
   margin: 1rem;
 }
 
+.attribute-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.attribute {
+  display: flex;
+  flex-direction: column;
+  width: 6rem;
+  height: 7rem;
+  background-color: red;
+  font-size: 1.2rem;
+}
+
 .character-screen {
   width: inherit;
 }
