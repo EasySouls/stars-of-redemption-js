@@ -13,8 +13,9 @@ export const GameStateContext = createContext();
 
 const initialCharacter = {
   name: "",
-  hp: 0,
+  level: 0,
   hpMax: 0,
+  hp: 0,
   encumbrence: 0,
   encumbrenceMax: 0,
   strength: 0,

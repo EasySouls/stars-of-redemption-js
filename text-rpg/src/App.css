@@ -47,6 +47,10 @@
   text-align: center;
 }
 
+.attribute-container button:hover {
+  cursor: pointer;
+}
+
 .attribute {
   display: flex;
   flex-direction: column;

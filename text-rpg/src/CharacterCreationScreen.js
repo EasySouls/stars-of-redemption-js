@@ -1,31 +1,55 @@
 import React, { useState, useContext } from "react";
-import { CharacterContext, GameStateContext, ThemeContext } from "./App";
+import { CharacterContext, GameStateContext } from "./App";
+import AttributeUpgrade from "./AttributeUpgrade";
+
+const temporaryCharacter = {
+  name: "",
+  level: 0,
+  hpMax: 0,
+  hp: 0,
+  encumbrence: 0,
+  encumbrenceMax: 0,
+  strength: 10,
+  dexterity: 10,
+  constitution: 10,
+  intelligence: 10,
+  wisdom: 10,
+  charisma: 10,
+  exp: 0,
+  expNext: 0,
+};
 
 export default function CharacterCreationScreen() {
-  const [answer, setAnswer] = useState("");
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("typing"); // 'typing', 'submitting' or 'success'
-  const [attributes, setAttributes] = useState([0, 0, 0, 0, 0, 0]);
+  const [tempChar, setTempChar] = useState(temporaryCharacter);
+  const [points, setPoints] = useState(14);
 
   const { character, setCharacter } = useContext(CharacterContext);
-  const { gameState, setGameState } = useContext(GameStateContext);
-  const { darkTheme } = useContext(ThemeContext);
-
-  const borderStyle = {
-    border: darkTheme.enabled ? "solid 0.2rem white" : "solid 0.2rem black",
-    borderRadius: "10px",
-  };
+  const { setGameState } = useContext(GameStateContext);
 
   async function handleSubmit(e) {
     e.preventDefault();
     setStatus("submitting");
     try {
-      await submitForm(answer);
-      setStatus("success");
+      await submitForm(tempChar.name);
       setCharacter({
-        ...character,
-        name: answer,
+        name: tempChar.name,
+        level: 1,
+        hpMax: 10 + tempChar.constitution * 2,
+        hp: character.hpMax,
+        encumbrenceMax: 10 + tempChar.strength * 5,
+        encumbrence: character.encumbrenceMax,
+        strength: tempChar.strength,
+        dexterity: tempChar.dexterity,
+        constitution: tempChar.constitution,
+        intelligence: tempChar.intelligence,
+        wisdom: tempChar.wisdom,
+        charisma: tempChar.charisma,
+        exp: 0,
+        expNext: 100,
       });
+      setStatus("success");
     } catch (err) {
       setStatus("typing");
       setError(err);
@@ -37,13 +61,13 @@ export default function CharacterCreationScreen() {
   }
 
   function handleTextAreaChange(e) {
-    setAnswer(e.target.value);
+    setTempChar({ ...tempChar, name: e.target.value });
   }
 
-  function submitForm(answer) {
+  function submitForm(name) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        let shouldError = answer.toLowerCase() === ""; //! List wrong answers
+        let shouldError = name.toLowerCase() === ""; //! List wrong answers
         if (shouldError) {
           reject(
             new Error("You can't make a character with this name. Try again!")
@@ -60,65 +84,21 @@ export default function CharacterCreationScreen() {
       <div className='character-creation-screen'>
         <h2>Choose the name of your character:</h2>
         <input
-          value={answer}
+          value={tempChar.name}
           onChange={handleTextAreaChange}
           disabled={status === "submitting"}
           placeholder='Something like Edward Kenway or Guts'
         />
-        <div className='attribute-container'>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Strength</p>
-              <br />
-              {character.strength}
-            </span>
-            <button>+1</button>
-          </div>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Dexterity</p>
-              <br />
-              {character.dexterity}
-            </span>
-            <button>+1</button>
-          </div>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Constitution</p>
-              <br />
-              {character.constitution}
-            </span>
-            <button>+1</button>
-          </div>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Intelligence</p>
-              <br />
-              {character.intelligence}
-            </span>
-            <button>+1</button>
-          </div>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Wisdom</p>
-              <br />
-              {character.wisdom}
-            </span>
-            <button>+1</button>
-          </div>
-          <div>
-            <span className='attribute' style={borderStyle}>
-              <p>Charisma</p>
-              <br />
-              {character.charisma}
-            </span>
-            <button>+1</button>
-          </div>
-        </div>
-        <br />
+        <p>Remaining points: {points}</p>
+        <AttributeUpgrade
+          tempChar={tempChar}
+          setTempChar={setTempChar}
+          points={points}
+          setPoints={setPoints}
+        />
         <button
           onClick={handleSubmit}
-          disabled={answer.length === 0 || status === "submitting"}
+          disabled={tempChar.name.length === 0 || status === "submitting"}
         >
           Create
         </button>
