@@ -37,7 +37,7 @@ export default function CharacterCreationScreen() {
         name: tempChar.name,
         level: 1,
         hpMax: 10 + tempChar.constitution * 2,
-        hp: character.hpMax,
+        hp: 10 + tempChar.constitution * 2,
         encumbrenceMax: 10 + tempChar.strength * 5,
         encumbrence: character.encumbrenceMax,
         strength: tempChar.strength,
@@ -98,7 +98,11 @@ export default function CharacterCreationScreen() {
         />
         <button
           onClick={handleSubmit}
-          disabled={tempChar.name.length === 0 || status === "submitting"}
+          disabled={
+            tempChar.name.length === 0 ||
+            status === "submitting" ||
+            points !== 0
+          }
         >
           Create
         </button>

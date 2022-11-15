@@ -4,12 +4,11 @@ import Sidebar from "./Sidebar";
 import lightIcon from "./icons/light-icon.png";
 import darkIcon from "./icons/dark-icon.png";
 import MainScreen from "./MainScreen";
+import Tooltip from "./Tooltip";
 
 export const CharacterContext = createContext();
 export const ThemeContext = createContext();
 export const GameStateContext = createContext();
-
-//! Bug: changing theme after changing the character name makes the page crash
 
 const initialCharacter = {
   name: "",
@@ -32,6 +31,12 @@ function App() {
   const [character, setCharacter] = useState(initialCharacter);
 
   const [gameState, setGameState] = useState("character-creation");
+
+  const [tooltip, setTooltip] = useState({
+    enabled: false,
+    left: 0,
+    top: 0,
+  });
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
@@ -70,16 +75,28 @@ function App() {
     });
   }
 
+  function changeTooltipShown(e) {
+    setTooltip((prevTooltip) => ({
+      enabled: !prevTooltip.enabled,
+      left: e.clientX,
+      top: e.clientY,
+    }));
+  }
+
   return (
     <div className='game' style={themeStyles}>
       <GameStateContext.Provider value={{ gameState, setGameState }}>
         <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
           <CharacterContext.Provider value={{ character, setCharacter }}>
+            {tooltip.enabled && (
+              <Tooltip left={tooltip.left} top={tooltip.top} />
+            )}
             <Sidebar
               changeTheme={changeTheme}
               themeIcon={darkTheme.icon}
               character={character}
               borderStyle={borderStyle1}
+              onMouseOver={changeTooltipShown}
             />
             <MainScreen borderStyle={borderStyle2} />
           </CharacterContext.Provider>

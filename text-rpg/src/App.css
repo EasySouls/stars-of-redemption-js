@@ -13,6 +13,15 @@
   flex-direction: row;
 }
 
+.tooltip {
+  position: absolute;
+  width: 4rem;
+  height: 2rem;
+  background-color: blue;
+  border: solid 0.5rem black;
+  z-index: 100;
+}
+
 .nav-buttons {
   display: flex;
   flex-direction: row;

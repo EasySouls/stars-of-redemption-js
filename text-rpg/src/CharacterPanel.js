@@ -2,19 +2,26 @@ import React, { useContext } from "react";
 import { CharacterContext } from "./App";
 
 export default function CharacterPanel(props) {
-  const { character, setCharacter } = useContext(CharacterContext);
+  const { character } = useContext(CharacterContext);
+  const c = character;
 
   return (
     <div className='character-panel'>
-      {/* Make this with a much smarter way*/}
       <b style={{ fontSize: "24px" }}>Character</b>
-      <p>Name: {character.name}</p>
-      <p>Strength: {character.strength}</p>
-      <p>Dexterity: {character.dexterity}</p>
-      <p>Constitution: {character.constitution}</p>
-      <p>Intelligence: {character.intelligence}</p>
-      <p>Wisdom: {character.wisdom}</p>
-      <p>Charisma: {character.charisma}</p>
+      <p>Name: {c.name}</p>
+      <p>Level: {c.level}</p>
+      <p>
+        HP: {c.hpMax}/{c.hp}
+      </p>
+      {/*<p>Strength: {c.strength}</p>
+      <p>Dexterity: {c.dexterity}</p>
+      <p>Constitution: {c.constitution}</p>
+      <p>Intelligence: {c.intelligence}</p>
+      <p>Wisdom: {c.wisdom}</p>
+  <p>Charisma: {c.charisma}</p>*/}
+      <p>
+        Encumbrence: {c.encumbrenceMax}/{c.encumbrence}
+      </p>
     </div>
   );
 }
