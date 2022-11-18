@@ -3,6 +3,7 @@
 *::after {
   box-sizing: border-box;
   font-family: "Poor Story", cursive;
+  margin: 0;
 }
 
 .game {
@@ -130,6 +131,12 @@
   height: auto;
   z-index: 2;
   pointer-events: none;
+}
+
+.sign-up {
+  text-align: center;
+  width: 40rem;
+  max-width: 40rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {
