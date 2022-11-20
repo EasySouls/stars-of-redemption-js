@@ -139,6 +139,11 @@
   max-width: 40rem;
 }
 
+.sign-up-error {
+  background-color: rgb(196, 126, 124);
+  border: solid 0.02rem red;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

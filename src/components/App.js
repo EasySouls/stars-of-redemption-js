@@ -1,11 +1,14 @@
 import "../App.css";
 import React, { createContext, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import lightIcon from "../icons/light-icon.png";
 import darkIcon from "../icons/dark-icon.png";
 import MainScreen from "./MainScreen";
 import Tooltip from "./Tooltip";
 import Signup from "./Signup";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
 import { AuthProvider } from "../contexts/AuthContext";
 
 export const CharacterContext = createContext();
@@ -87,26 +90,39 @@ function App() {
 
   return (
     <div className='game' style={themeStyles}>
-      <AuthProvider>
-        <GameStateContext.Provider value={{ gameState, setGameState }}>
-          <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
-            <CharacterContext.Provider value={{ character, setCharacter }}>
-              {tooltip.enabled && (
-                <Tooltip left={tooltip.left} top={tooltip.top} />
-              )}
-              <Sidebar
-                changeTheme={changeTheme}
-                themeIcon={darkTheme.icon}
-                character={character}
-                borderStyle={borderStyle1}
-                onMouseOver={changeTooltipShown}
-              />
-              <MainScreen borderStyle={borderStyle2} />
-              <Signup />
-            </CharacterContext.Provider>
-          </ThemeContext.Provider>
-        </GameStateContext.Provider>
-      </AuthProvider>
+      <Router>
+        <AuthProvider>
+          <GameStateContext.Provider value={{ gameState, setGameState }}>
+            <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
+              <CharacterContext.Provider value={{ character, setCharacter }}>
+                <Routes>
+                  <Route exact path='/' element={<Dashboard />} />
+                  <Route path='/signup' element={<Signup />} />
+                  <Route path='/login' element={<Login />} />
+                  <Route
+                    path='/main'
+                    element={
+                      <>
+                        {tooltip.enabled && (
+                          <Tooltip left={tooltip.left} top={tooltip.top} />
+                        )}
+                        <Sidebar
+                          changeTheme={changeTheme}
+                          themeIcon={darkTheme.icon}
+                          character={character}
+                          borderStyle={borderStyle1}
+                          onMouseOver={changeTooltipShown}
+                        />
+                        <MainScreen borderStyle={borderStyle2} />
+                      </>
+                    }
+                  />
+                </Routes>
+              </CharacterContext.Provider>
+            </ThemeContext.Provider>
+          </GameStateContext.Provider>
+        </AuthProvider>
+      </Router>
     </div>
   );
 }
