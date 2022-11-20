@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Stars-of-Redemption/static/css/main.33f271df.css",
+    "main.js": "/Stars-of-Redemption/static/js/main.7bc3d683.js",
+    "index.html": "/Stars-of-Redemption/index.html",
+    "main.33f271df.css.map": "/Stars-of-Redemption/static/css/main.33f271df.css.map",
+    "main.7bc3d683.js.map": "/Stars-of-Redemption/static/js/main.7bc3d683.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.33f271df.css",
+    "static/js/main.7bc3d683.js"
+  ]
+}
