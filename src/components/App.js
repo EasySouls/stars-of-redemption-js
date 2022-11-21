@@ -100,7 +100,7 @@ function App() {
                   <Route path='/signup' element={<Signup />} />
                   <Route path='/login' element={<Login />} />
                   <Route
-                    path='/main'
+                    path='/stars-of-redemption'
                     element={
                       <>
                         {tooltip.enabled && (
