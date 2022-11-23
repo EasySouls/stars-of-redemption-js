@@ -19,7 +19,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/stars-of-redemption");
     } catch {
       setError("Failed to log in");
     }
@@ -28,10 +28,10 @@ export default function Login() {
   }
 
   return (
-    <div className='sign-up'>
+    <div className='login'>
       <h1>Login</h1>
       {error && (
-        <div className='sign-up-error'>
+        <div className='login-error'>
           <h2>{error}</h2>
         </div>
       )}
@@ -49,8 +49,11 @@ export default function Login() {
         </button>
       </form>
       <div>
+        <Link to='/stars-of-redemption/forgot-password'>Forgot password?</Link>
+      </div>
+      <div>
         Need an account?
-        <Link to='/signup'>Sign Up</Link>
+        <Link to='/stars-of-redemption/signup'>Sign Up</Link>
       </div>
     </div>
   );

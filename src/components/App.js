@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { createContext, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import lightIcon from "../icons/light-icon.png";
 import darkIcon from "../icons/dark-icon.png";
@@ -10,6 +10,8 @@ import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import { AuthProvider } from "../contexts/AuthContext";
+import PrivateRoute from "./PrivateRoute";
+import ForgotPassword from "./ForgotPassword";
 
 export const CharacterContext = createContext();
 export const ThemeContext = createContext();
@@ -90,39 +92,49 @@ function App() {
 
   return (
     <div className='game' style={themeStyles}>
-      <Router>
-        <AuthProvider>
-          <GameStateContext.Provider value={{ gameState, setGameState }}>
-            <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
-              <CharacterContext.Provider value={{ character, setCharacter }}>
-                <Routes>
-                  <Route exact path='/' element={<Dashboard />} />
-                  <Route path='/signup' element={<Signup />} />
-                  <Route path='/login' element={<Login />} />
-                  <Route
-                    path='/stars-of-redemption'
-                    element={
-                      <>
-                        {tooltip.enabled && (
-                          <Tooltip left={tooltip.left} top={tooltip.top} />
-                        )}
-                        <Sidebar
-                          changeTheme={changeTheme}
-                          themeIcon={darkTheme.icon}
-                          character={character}
-                          borderStyle={borderStyle1}
-                          onMouseOver={changeTooltipShown}
-                        />
-                        <MainScreen borderStyle={borderStyle2} />
-                      </>
-                    }
-                  />
-                </Routes>
-              </CharacterContext.Provider>
-            </ThemeContext.Provider>
-          </GameStateContext.Provider>
-        </AuthProvider>
-      </Router>
+      <AuthProvider>
+        <GameStateContext.Provider value={{ gameState, setGameState }}>
+          <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
+            <CharacterContext.Provider value={{ character, setCharacter }}>
+              <Routes>
+                <PrivateRoute
+                  exact
+                  path='/stars-of-redemption/dashboard'
+                  element={<Dashboard />}
+                />
+                <Route
+                  path='/stars-of-redemption/signup'
+                  element={<Signup />}
+                />
+                <Route path='/stars-of-redemption/login' element={<Login />} />
+                <Route
+                  path='/stars-of-redemption/forgot-password'
+                  element={<ForgotPassword />}
+                />
+                <PrivateRoute
+                  exact
+                  path='/stars-of-redemption'
+                  element={
+                    <>
+                      {tooltip.enabled && (
+                        <Tooltip left={tooltip.left} top={tooltip.top} />
+                      )}
+                      <Sidebar
+                        changeTheme={changeTheme}
+                        themeIcon={darkTheme.icon}
+                        character={character}
+                        borderStyle={borderStyle1}
+                        onMouseOver={changeTooltipShown}
+                      />
+                      <MainScreen borderStyle={borderStyle2} />
+                    </>
+                  }
+                />
+              </Routes>
+            </CharacterContext.Provider>
+          </ThemeContext.Provider>
+        </GameStateContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

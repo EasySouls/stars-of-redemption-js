@@ -144,6 +144,28 @@
   border: solid 0.02rem red;
 }
 
+.login {
+  text-align: center;
+  width: 40rem;
+  max-width: 40rem;
+}
+
+.login-error {
+  background-color: rgb(196, 126, 124);
+  border: solid 0.02rem red;
+}
+
+.profile {
+  text-align: center;
+  width: 40rem;
+  max-width: 40rem;
+}
+
+.profile-error {
+  background-color: rgb(196, 126, 124);
+  border: solid 0.02rem red;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

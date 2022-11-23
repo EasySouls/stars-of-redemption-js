@@ -17,14 +17,14 @@ export default function Signup() {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passowords do not match!");
+      return setError("Passwords do not match!");
     }
 
     try {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/stars-of-redemption");
     } catch {
       setError("Failed to create an account");
     }
@@ -58,7 +58,7 @@ export default function Signup() {
       </form>
       <div>
         Already have an account?
-        <Link to='/login'>Login</Link>
+        <Link to='/stars-of-redemption/login'>Login</Link>
       </div>
     </div>
   );
