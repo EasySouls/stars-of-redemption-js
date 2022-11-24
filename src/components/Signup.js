@@ -43,15 +43,15 @@ export default function Signup() {
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
         <br />
-        <input type='email' ref={emailRef} />
+        <input type='email' ref={emailRef} required />
         <br />
         <label>Password</label>
         <br />
-        <input type='password' ref={passwordRef} />
+        <input type='password' ref={passwordRef} required />
         <br />
         <label>Password confirmation</label>
         <br />
-        <input type='password' ref={passwordConfirmRef} />
+        <input type='password' ref={passwordConfirmRef} required />
         <button type='submit' disabled={loading}>
           Sign Up
         </button>

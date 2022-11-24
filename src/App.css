@@ -155,6 +155,11 @@
   border: solid 0.02rem red;
 }
 
+.login-message {
+  background-color: rgb(122, 205, 226);
+  border: solid 0.02rem rgb(8, 82, 126);
+}
+
 .profile {
   text-align: center;
   width: 40rem;

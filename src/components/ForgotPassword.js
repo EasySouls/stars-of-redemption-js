@@ -35,6 +35,11 @@ export default function ForgotPassword() {
           <h2>{error}</h2>
         </div>
       )}
+      {message && (
+        <div className='login-message'>
+          <h2>{message}</h2>
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
         <label>Email:</label>
         <br />
