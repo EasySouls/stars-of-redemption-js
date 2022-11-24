@@ -1,6 +1,6 @@
 import "../App.css";
 import React, { createContext, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import lightIcon from "../icons/light-icon.png";
 import darkIcon from "../icons/dark-icon.png";
@@ -97,7 +97,7 @@ function App() {
         <GameStateContext.Provider value={{ gameState, setGameState }}>
           <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
             <CharacterContext.Provider value={{ character, setCharacter }}>
-              <BrowserRouter basename='/'>
+              <HashRouter>
                 <Routes>
                   <Route
                     path='/dashboard'
@@ -131,7 +131,7 @@ function App() {
                   />
                   <Route path='/update-profile' element={<UpdateProfile />} />
                 </Routes>
-              </BrowserRouter>
+              </HashRouter>
             </CharacterContext.Provider>
           </ThemeContext.Provider>
         </GameStateContext.Provider>
