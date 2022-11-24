@@ -24,7 +24,7 @@ export default function Signup() {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
-      navigate("/stars-of-redemption");
+      navigate("/");
     } catch {
       setError("Failed to create an account");
     }
@@ -58,7 +58,7 @@ export default function Signup() {
       </form>
       <div>
         Already have an account?
-        <Link to='/stars-of-redemption/login'>Login</Link>
+        <Link to='/login'>Login</Link>
       </div>
     </div>
   );

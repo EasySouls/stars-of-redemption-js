@@ -5,7 +5,7 @@ import { GameStateContext } from "./App";
 import NavigationButtons from "./NavigationButtons";
 
 export default function MainScreen({ borderStyle }) {
-  const { gameState, setGameState } = useContext(GameStateContext);
+  const { gameState } = useContext(GameStateContext);
 
   if (gameState === "character-creation") {
     return (

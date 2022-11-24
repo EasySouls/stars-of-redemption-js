@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { CharacterContext, ThemeContext } from "./App";
 
 export default function CharacterScreen(props) {
-  const { character, setCharacter } = useContext(CharacterContext);
+  const { character } = useContext(CharacterContext);
   const { borderStyle } = useContext(ThemeContext);
   const [canUpgrade, setCanUpgrade] = useState(false);
 

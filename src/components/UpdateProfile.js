@@ -7,7 +7,7 @@ export default function UpdateProfile() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const { currentUser, updatePassword, updateEmail } = useAuth();
+  const { currentUser, updatePasswordAPI, updateEmailAPI } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,15 +25,15 @@ export default function UpdateProfile() {
     setError("");
 
     if (emailRef.current.value !== currentUser.email) {
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(updateEmailAPI(emailRef.current.value));
     }
     if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+      promises.push(updatePasswordAPI(passwordRef.current.value));
     }
 
     Promise.all(promises)
       .then(() => {
-        navigate("/stars-of-redemption/dashboard");
+        navigate("/dashboard");
       })
       .catch(() => {
         setError("Failed to update account");
@@ -76,7 +76,7 @@ export default function UpdateProfile() {
         </button>
       </form>
       <div>
-        <Link to='/stars-of-redemption/dashboard'>Cancel</Link>
+        <Link to='/dashboard'>Cancel</Link>
       </div>
     </div>
   );

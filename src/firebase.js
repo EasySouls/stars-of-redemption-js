@@ -1,9 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-// import {
-//   initializeAnalytics,
-//   getAnalytics,
-// } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -16,6 +13,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// const initAnalytics = initializeAnalytics(app);
-// export const analytics = getAnalytics(initAnalytics);
-export const auth = getAuth();
+export const auth = getAuth(app);
+
+const analytics = getAnalytics(app);
+logEvent(analytics, "notification_received");

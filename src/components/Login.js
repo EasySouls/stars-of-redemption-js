@@ -19,7 +19,7 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/stars-of-redemption");
+      navigate("/");
     } catch {
       setError("Failed to log in");
     }
@@ -49,11 +49,11 @@ export default function Login() {
         </button>
       </form>
       <div>
-        <Link to='/stars-of-redemption/forgot-password'>Forgot password?</Link>
+        <Link to='/forgot-password'>Forgot password?</Link>
       </div>
       <div>
         Need an account?
-        <Link to='/stars-of-redemption/signup'>Sign Up</Link>
+        <Link to='/signup'>Sign Up</Link>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function ForgotPassword() {
   const emailRef = useRef();
 
-  const { resetPasword } = useAuth();
+  const { resetPassword } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,9 +18,9 @@ export default function ForgotPassword() {
       setMessage("");
       setError("");
       setLoading(true);
-      await resetPasword(emailRef.current.value);
+      await resetPassword(emailRef.current.value);
       setMessage("Check your inbox for further instructions!");
-    } catch {
+    } catch (error) {
       setError("Failed to reset password");
     }
 
@@ -50,11 +50,11 @@ export default function ForgotPassword() {
         </button>
       </form>
       <div>
-        <Link to='/stars-of-redemption/login'>Login</Link>
+        <Link to='/login'>Login</Link>
       </div>
       <div>
         Need an account?
-        <Link to='/stars-of-redemption/signup'>Sign Up</Link>
+        <Link to='/signup'>Sign Up</Link>
       </div>
     </div>
   );

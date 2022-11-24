@@ -97,15 +97,22 @@ function App() {
         <GameStateContext.Provider value={{ gameState, setGameState }}>
           <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
             <CharacterContext.Provider value={{ character, setCharacter }}>
-              <BrowserRouter basename='/stars-of-redemption'>
+              <BrowserRouter basename='/'>
                 <Routes>
-                  <PrivateRoute path='dashboard' element={<Dashboard />} />
+                  <Route
+                    path='/dashboard'
+                    element={
+                      <PrivateRoute>
+                        <Dashboard />
+                      </PrivateRoute>
+                    }
+                  />
                   <Route path='/signup' element={<Signup />} />
                   <Route path='/login' element={<Login />} />
                   <Route path='/forgot-password' element={<ForgotPassword />} />
                   <Route
                     exact
-                    path='/stars-of-redemption'
+                    path='/'
                     element={
                       <PrivateRoute>
                         {tooltip.enabled && (

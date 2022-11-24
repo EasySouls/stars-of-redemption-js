@@ -1,5 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  updateEmail,
+  updatePassword,
+} from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -12,27 +20,51 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        //Signed in
+        const user = userCredential.user;
+        console.log(user.email);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        //Signed in
+        const user = userCredential.user;
+        console.log(user.email);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   }
 
   function logout() {
-    return auth.signOut();
+    return signOut(auth);
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return sendPasswordResetEmail(auth, email).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
   }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email);
+  function updateEmailAPI(email) {
+    return updateEmail(currentUser, email);
   }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password);
+  function updatePasswordAPI(password) {
+    return updatePassword(currentUser, password);
   }
 
   useEffect(() => {
@@ -50,8 +82,8 @@ export function AuthProvider({ children }) {
     signup,
     logout,
     resetPassword,
-    updateEmail,
-    updatePassword,
+    updateEmailAPI,
+    updatePasswordAPI,
   };
 
   return (

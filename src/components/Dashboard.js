@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     try {
       await logout();
-      navigate("/stars-of-redemption/login");
+      navigate("/login");
     } catch {
       setError("Failed to log out.");
     }
@@ -31,7 +31,7 @@ export default function Dashboard() {
         <button onClick={handleLogout}>Log Out</button>
       </div>
       <div>
-        <Link to='/stars-of-redemption/update-profile'>Update profile</Link>
+        <Link to='/update-profile'>Update profile</Link>
       </div>
     </div>
   );
