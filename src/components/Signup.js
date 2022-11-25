@@ -33,32 +33,40 @@ export default function Signup() {
   }
 
   return (
-    <div className='sign-up'>
-      <h1>Sign Up</h1>
-      {error && (
-        <div className='sign-up-error'>
-          <h2>{error}</h2>
+    <div className='sign-up-container'>
+      <div className='sign-up'>
+        <h1>Sign Up</h1>
+        {error && (
+          <div className='sign-up-error'>
+            <h2>{error}</h2>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <input type='email' ref={emailRef} required placeholder='Email' />
+          <br />
+          <br />
+          <input
+            type='password'
+            ref={passwordRef}
+            required
+            placeholder='Password'
+          />
+          <br />
+          <input
+            type='password'
+            ref={passwordConfirmRef}
+            required
+            placeholder='Password confirmation'
+          />
+          <br />
+          <button type='submit' disabled={loading}>
+            Sign Up
+          </button>
+        </form>
+        <div>
+          Already have an account?
+          <Link to='/login'>Login</Link>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <br />
-        <input type='email' ref={emailRef} required />
-        <br />
-        <label>Password</label>
-        <br />
-        <input type='password' ref={passwordRef} required />
-        <br />
-        <label>Password confirmation</label>
-        <br />
-        <input type='password' ref={passwordConfirmRef} required />
-        <button type='submit' disabled={loading}>
-          Sign Up
-        </button>
-      </form>
-      <div>
-        Already have an account?
-        <Link to='/login'>Login</Link>
       </div>
     </div>
   );

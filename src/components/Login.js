@@ -28,32 +28,30 @@ export default function Login() {
   }
 
   return (
-    <div className='login'>
-      <h1>Login</h1>
-      {error && (
-        <div className='login-error'>
-          <h2>{error}</h2>
+    <div className='login-container'>
+      <div className='login'>
+        <h1>Login</h1>
+        {error && (
+          <div className='login-error'>
+            <h2>{error}</h2>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <input type='email' ref={emailRef} placeholder='Email' />
+          <br />
+          <input type='password' ref={passwordRef} placeholder='Password' />
+          <br />
+          <button type='submit' disabled={loading}>
+            Login
+          </button>
+        </form>
+        <div>
+          <Link to='/forgot-password'>Forgot password?</Link>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <br />
-        <input type='email' ref={emailRef} />
-        <br />
-        <label>Password</label>
-        <br />
-        <input type='password' ref={passwordRef} />
-        <br />
-        <button type='submit' disabled={loading}>
-          Login
-        </button>
-      </form>
-      <div>
-        <Link to='/forgot-password'>Forgot password?</Link>
-      </div>
-      <div>
-        Need an account?
-        <Link to='/signup'>Sign Up</Link>
+        <div>
+          Need an account?
+          <Link to='/signup'>Sign Up</Link>
+        </div>
       </div>
     </div>
   );

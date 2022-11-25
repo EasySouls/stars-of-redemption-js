@@ -19,19 +19,21 @@ export default function Dashboard() {
   }
 
   return (
-    <div className='dashboard'>
-      <div className='profile'>
-        <h2>Profile</h2>
-        {error && (
-          <div className='profile-error'>
-            <h2>{error}</h2>
-          </div>
-        )}
-        <strong>Email:</strong> {currentUser.email}
-        <button onClick={handleLogout}>Log Out</button>
-      </div>
-      <div>
-        <Link to='/update-profile'>Update profile</Link>
+    <div className='dashboard-container'>
+      <div className='dashboard'>
+        <div className='profile'>
+          <h2>Profile</h2>
+          {error && (
+            <div className='profile-error'>
+              <h2>{error}</h2>
+            </div>
+          )}
+          <strong>Email:</strong> {currentUser.email}
+          <button onClick={handleLogout}>Log Out</button>
+        </div>
+        <div>
+          <Link to='/update-profile'>Update profile</Link>
+        </div>
       </div>
     </div>
   );

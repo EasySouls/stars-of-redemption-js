@@ -28,33 +28,33 @@ export default function ForgotPassword() {
   }
 
   return (
-    <div className='login'>
-      <h1>Password reset</h1>
-      {error && (
-        <div className='login-error'>
-          <h2>{error}</h2>
+    <div className='login-container'>
+      <div className='login'>
+        <h1>Password reset</h1>
+        {error && (
+          <div className='login-error'>
+            <h2>{error}</h2>
+          </div>
+        )}
+        {message && (
+          <div className='login-message'>
+            <h2>{message}</h2>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <input type='email' ref={emailRef} placeholder='Email' />
+          <br />
+          <button type='submit' disabled={loading}>
+            Reset password
+          </button>
+        </form>
+        <div>
+          <Link to='/login'>Login</Link>
         </div>
-      )}
-      {message && (
-        <div className='login-message'>
-          <h2>{message}</h2>
+        <div>
+          Need an account?
+          <Link to='/signup'>Sign Up</Link>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <br />
-        <input type='email' ref={emailRef} />
-        <br />
-        <button type='submit' disabled={loading}>
-          Reset password
-        </button>
-      </form>
-      <div>
-        <Link to='/login'>Login</Link>
-      </div>
-      <div>
-        Need an account?
-        <Link to='/signup'>Sign Up</Link>
       </div>
     </div>
   );

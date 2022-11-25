@@ -133,10 +133,39 @@
   pointer-events: none;
 }
 
+.sign-up-container button {
+  margin: 10px 0px 5px 0px;
+}
+
 .sign-up {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  width: 40rem;
-  max-width: 40rem;
+  width: 40vw;
+  max-width: 800px;
+  height: 20vh;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  border: solid 0.2rem black;
+  font-family: "Montserrat", sans-serif;
+}
+
+.sign-up-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(41, 10, 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-up-container h1 {
+  margin-bottom: 10px;
+}
+
+.sign-up-container button {
+  margin: 10px 0px 5px 0px;
 }
 
 .sign-up-error {
@@ -145,9 +174,35 @@
 }
 
 .login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  width: 40rem;
-  max-width: 40rem;
+  width: 40vw;
+  max-width: 800px;
+  height: 20vh;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  border: solid 0.2rem black;
+  font-family: sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(41, 10, 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container h1 {
+  margin-bottom: 10px;
+}
+
+.login-container button {
+  margin: 10px 0px 5px 0px;
 }
 
 .login-error {
@@ -160,10 +215,62 @@
   border: solid 0.02rem rgb(8, 82, 126);
 }
 
-.profile {
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
-  width: 40rem;
-  max-width: 40rem;
+  width: 40vw;
+  max-width: 800px;
+  height: 20vh;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  border: solid 0.2rem black;
+  font-family: "Montserrat", sans-serif;
+}
+
+.dashboard-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(41, 10, 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-container h1 {
+  margin-bottom: 10px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 40vw;
+  max-width: 800px;
+  height: 20vh;
+  background-color: rgb(200, 200, 200);
+  border-radius: 10px;
+  border: solid 0.2rem black;
+  font-family: "Montserrat", sans-serif;
+}
+
+.profile-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(41, 10, 10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-container h1 {
+  margin-bottom: 10px;
+}
+
+.profile-container button {
+  margin: 10px 0px 5px 0px;
 }
 
 .profile-error {

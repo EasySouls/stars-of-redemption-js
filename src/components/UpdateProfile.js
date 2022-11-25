@@ -44,39 +44,41 @@ export default function UpdateProfile() {
   }
 
   return (
-    <div className='sign-up'>
-      <h1>Update Profile</h1>
-      {error && (
-        <div className='sign-up-error'>
-          <h2>{error}</h2>
+    <div className='sign-up-cpntainer'>
+      <div className='sign-up'>
+        <h1>Update Profile</h1>
+        {error && (
+          <div className='sign-up-error'>
+            <h2>{error}</h2>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <label>Email:</label>
+          <br />
+          <input type='email' ref={emailRef} defaultValue={currentUser.email} />
+          <br />
+          <label>Password</label>
+          <br />
+          <input
+            type='password'
+            ref={passwordRef}
+            placeholder='Leave blank to keep the same'
+          />
+          <br />
+          <label>Password confirmation</label>
+          <br />
+          <input
+            type='password'
+            ref={passwordConfirmRef}
+            placeholder='Leave blank to keep the same'
+          />
+          <button type='submit' disabled={loading}>
+            Update
+          </button>
+        </form>
+        <div>
+          <Link to='/dashboard'>Cancel</Link>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <br />
-        <input type='email' ref={emailRef} defaultValue={currentUser.email} />
-        <br />
-        <label>Password</label>
-        <br />
-        <input
-          type='password'
-          ref={passwordRef}
-          placeholder='Leave blank to keep the same'
-        />
-        <br />
-        <label>Password confirmation</label>
-        <br />
-        <input
-          type='password'
-          ref={passwordConfirmRef}
-          placeholder='Leave blank to keep the same'
-        />
-        <button type='submit' disabled={loading}>
-          Update
-        </button>
-      </form>
-      <div>
-        <Link to='/dashboard'>Cancel</Link>
       </div>
     </div>
   );
