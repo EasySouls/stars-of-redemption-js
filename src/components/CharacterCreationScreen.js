@@ -57,7 +57,7 @@ export default function CharacterCreationScreen() {
   }
 
   function nextGameState() {
-    setGameState("character-screen");
+    setGameState("adventure");
   }
 
   function handleTextAreaChange(e) {

@@ -9,8 +9,8 @@ export default function NavigationButtons() {
     setGameState("character-screen");
   }
 
-  function goToStory() {
-    setGameState("story");
+  function goToAdventure() {
+    setGameState("Adventure");
   }
 
   function goToMenu() {
@@ -41,10 +41,10 @@ export default function NavigationButtons() {
       <button
         className='nav-btn'
         style={buttonStyle}
-        onClick={goToStory}
+        onClick={goToAdventure}
         disabled={gameState === "character-creation"}
       >
-        Story
+        Adventure
       </button>
       <button
         className='nav-btn'
