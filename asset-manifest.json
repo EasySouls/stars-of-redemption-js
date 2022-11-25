@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/stars-of-redemption/static/css/main.163e1d45.css",
-    "main.js": "/stars-of-redemption/static/js/main.cc4e744d.js",
+    "main.css": "/stars-of-redemption/static/css/main.20657f9f.css",
+    "main.js": "/stars-of-redemption/static/js/main.2af3fc1a.js",
     "index.html": "/stars-of-redemption/index.html",
-    "main.163e1d45.css.map": "/stars-of-redemption/static/css/main.163e1d45.css.map",
-    "main.cc4e744d.js.map": "/stars-of-redemption/static/js/main.cc4e744d.js.map"
+    "main.20657f9f.css.map": "/stars-of-redemption/static/css/main.20657f9f.css.map",
+    "main.2af3fc1a.js.map": "/stars-of-redemption/static/js/main.2af3fc1a.js.map"
   },
   "entrypoints": [
-    "static/css/main.163e1d45.css",
-    "static/js/main.cc4e744d.js"
+    "static/css/main.20657f9f.css",
+    "static/js/main.2af3fc1a.js"
   ]
 }
