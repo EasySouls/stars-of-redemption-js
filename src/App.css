@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
 *,
 *::before,
 *::after {
@@ -76,6 +81,16 @@
 
 .character-screen h1 {
   text-align: center;
+}
+
+.adventure {
+  width: inherit;
+  height: inherit;
+}
+
+.encyclopedia {
+  width: inherit;
+  height: inherit;
 }
 
 .character-screen-attributes {

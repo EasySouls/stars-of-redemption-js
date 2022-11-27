@@ -10,7 +10,7 @@ export default function NavigationButtons() {
   }
 
   function goToAdventure() {
-    setGameState("Adventure");
+    setGameState("adventure");
   }
 
   function goToMenu() {
@@ -19,6 +19,10 @@ export default function NavigationButtons() {
 
   function goToSettings() {
     setGameState("settings");
+  }
+
+  function goToEncyclopedia() {
+    setGameState("encyclopedia");
   }
 
   const buttonStyle = {
@@ -61,6 +65,14 @@ export default function NavigationButtons() {
         disabled={gameState === "character-creation"}
       >
         Settings
+      </button>
+      <button
+        className='nav-btn'
+        style={buttonStyle}
+        onClick={goToEncyclopedia}
+        disabled={gameState === "character-creation"}
+      >
+        Encyclopedia
       </button>
     </div>
   );

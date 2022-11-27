@@ -4,6 +4,7 @@ import CharacterCreationScreen from "./CharacterCreationScreen";
 import { GameStateContext } from "./App";
 import NavigationButtons from "./NavigationButtons";
 import Adventure from "./Adventure";
+import Encyclopedia from "./Encyclopedia";
 
 export default function MainScreen({ borderStyle }) {
   const { gameState } = useContext(GameStateContext);
@@ -27,6 +28,27 @@ export default function MainScreen({ borderStyle }) {
       <div className='main-screen' style={borderStyle}>
         <NavigationButtons />
         <Adventure />
+      </div>
+    );
+  } else if (gameState === "encyclopedia") {
+    return (
+      <div className='main-screen' style={borderStyle}>
+        <NavigationButtons />
+        <Encyclopedia />
+      </div>
+    );
+  } else if (gameState === "menu") {
+    return (
+      <div className='main-screen' style={borderStyle}>
+        <NavigationButtons />
+        {/* Menu */}
+      </div>
+    );
+  } else if (gameState === "settings") {
+    return (
+      <div className='main-screen' style={borderStyle}>
+        <NavigationButtons />
+        {/* Settings */}
       </div>
     );
   }

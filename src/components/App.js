@@ -92,7 +92,10 @@ function App() {
   }
 
   return (
-    <div className='game' style={themeStyles}>
+    <div
+      className={darkTheme.enabled ? "game dark" : "game"}
+      style={themeStyles}
+    >
       <AuthProvider>
         <GameStateContext.Provider value={{ gameState, setGameState }}>
           <ThemeContext.Provider value={{ darkTheme, borderStyle }}>

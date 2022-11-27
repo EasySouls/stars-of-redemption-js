@@ -19,11 +19,9 @@ export default function AttributeUpgrade({
     if (!incrementing && tempChar[attr] > 0) {
       setPoints(++points);
       setTempChar((prevChar) => ({ ...prevChar, [attr]: prevChar[attr] - 1 }));
-      console.log(points);
     } else if (incrementing && points > 0 && tempChar[attr] < 20) {
       setPoints(--points);
       setTempChar((prevChar) => ({ ...prevChar, [attr]: prevChar[attr] + 1 }));
-      console.log(points);
     }
   }
 

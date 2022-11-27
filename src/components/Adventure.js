@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { CharacterContext } from "./App";
 
-export default function Adventure({ character }) {
-  const character = useState(character);
+const textNodes = [
+  {
+    id: 1,
+    text: "You wake up under a tree",
+    options: [
+      {
+        text: "Sleep back",
+        setState: { armor: true },
+        nextText: 2,
+      },
+      {
+        text: "Get up",
+      },
+    ],
+  },
+];
 
-  return <div>Adventure</div>;
+export default function Adventure() {
+  const { character, setCharacter } = useContext(CharacterContext);
+
+  const [gameStarted, setGameStarted] = useState(false);
+  const [adventureState, setAdventureState] = useState({});
+
+  function startGame() {
+    setGameStarted((prev) => !prev);
+    showNextNode(1);
+  }
+
+  function showNextNode(textNodeIndex) {}
+
+  console.log(gameStarted);
+
+  return gameStarted ? (
+    <div className='adventure'>
+      <h1>Adventure</h1>
+      <div className='text'>Text</div>
+      <div className='option-buttons'></div>
+    </div>
+  ) : (
+    <div className='adventure'>
+      <h2>Start you adventure</h2>
+      <button onClick={startGame}>Click here</button>
+    </div>
+  );
 }
