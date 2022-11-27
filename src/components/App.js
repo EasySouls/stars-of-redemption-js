@@ -1,14 +1,14 @@
 import "../App.css";
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import lightIcon from "../icons/light-icon.png";
 import darkIcon from "../icons/dark-icon.png";
 import MainScreen from "./MainScreen";
-import Tooltip from "./Tooltip";
 import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import Navbar from "./Navbar";
 import { AuthProvider } from "../contexts/AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
@@ -40,12 +40,6 @@ function App() {
 
   const [gameState, setGameState] = useState("character-creation");
 
-  const [tooltip, setTooltip] = useState({
-    enabled: false,
-    left: 0,
-    top: 0,
-  });
-
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,
     icon: darkIcon,
@@ -76,6 +70,9 @@ function App() {
 
   function changeTheme() {
     setDarkTheme((prevTheme) => {
+      if (prevTheme.enabled) localStorage.theme = "light";
+      else localStorage.theme = "dark";
+
       return {
         enabled: !prevTheme.enabled,
         icon: !prevTheme.enabled ? lightIcon : darkIcon,
@@ -83,19 +80,34 @@ function App() {
     });
   }
 
-  function changeTooltipShown(e) {
-    setTooltip((prevTooltip) => ({
-      enabled: !prevTooltip.enabled,
-      left: e.clientX,
-      top: e.clientY,
-    }));
-  }
+  useEffect(() => {
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      setDarkTheme(() => {
+        localStorage.theme = "dark";
+
+        return {
+          enabled: true,
+          icon: darkIcon,
+        };
+      });
+    } else {
+      setDarkTheme(() => {
+        localStorage.theme = "light";
+
+        return {
+          enabled: false,
+          icon: lightIcon,
+        };
+      });
+    }
+  }, []);
 
   return (
-    <div
-      className={darkTheme.enabled ? "game dark" : "game"}
-      style={themeStyles}
-    >
+    <div className={`${darkTheme.enabled ? "dark" : ""}`}>
       <AuthProvider>
         <GameStateContext.Provider value={{ gameState, setGameState }}>
           <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
@@ -118,17 +130,22 @@ function App() {
                     path='/'
                     element={
                       <PrivateRoute>
-                        {tooltip.enabled && (
-                          <Tooltip left={tooltip.left} top={tooltip.top} />
-                        )}
-                        <Sidebar
-                          changeTheme={changeTheme}
-                          themeIcon={darkTheme.icon}
-                          character={character}
-                          borderStyle={borderStyle1}
-                          onMouseOver={changeTooltipShown}
-                        />
-                        <MainScreen borderStyle={borderStyle2} />
+                        <div className='flex flex-col'>
+                          <div>
+                            <Navbar />
+                          </div>
+                          <div className='flex'>
+                            <Sidebar
+                              changeTheme={changeTheme}
+                              themeIcon={
+                                darkTheme.enabled ? lightIcon : darkIcon
+                              }
+                              character={character}
+                              borderStyle={borderStyle1}
+                            />
+                            <MainScreen borderStyle={borderStyle2} />
+                          </div>
+                        </div>
                       </PrivateRoute>
                     }
                   />

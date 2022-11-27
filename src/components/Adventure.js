@@ -31,8 +31,6 @@ export default function Adventure() {
 
   function showNextNode(textNodeIndex) {}
 
-  console.log(gameStarted);
-
   return gameStarted ? (
     <div className='adventure'>
       <h1>Adventure</h1>
