@@ -6,7 +6,7 @@ export default function CharacterPanel(props) {
   const c = character;
 
   return (
-    <div className='character-panel'>
+    <div>
       <b style={{ fontSize: "24px" }}>Character</b>
       <p>Name: {c.name}</p>
       <p>Level: {c.level}</p>

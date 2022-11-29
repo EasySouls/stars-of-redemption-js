@@ -107,7 +107,11 @@ function App() {
   }, []);
 
   return (
-    <div className={`${darkTheme.enabled ? "dark" : ""}`}>
+    <div
+      className={`w-screen h-screen text-xs lg:text-base ${
+        darkTheme.enabled ? "dark" : ""
+      }`}
+    >
       <AuthProvider>
         <GameStateContext.Provider value={{ gameState, setGameState }}>
           <ThemeContext.Provider value={{ darkTheme, borderStyle }}>
@@ -130,20 +134,19 @@ function App() {
                     path='/'
                     element={
                       <PrivateRoute>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col w-screen h-screen font-serif text-black dark:text-white bg-white dark:bg-primary-800'>
                           <div>
                             <Navbar />
                           </div>
-                          <div className='flex'>
+                          <div className='flex h-screen w-screen'>
                             <Sidebar
                               changeTheme={changeTheme}
                               themeIcon={
                                 darkTheme.enabled ? lightIcon : darkIcon
                               }
                               character={character}
-                              borderStyle={borderStyle1}
                             />
-                            <MainScreen borderStyle={borderStyle2} />
+                            <MainScreen />
                           </div>
                         </div>
                       </PrivateRoute>

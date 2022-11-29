@@ -81,15 +81,16 @@ export default function CharacterCreationScreen() {
 
   if (status !== "success") {
     return (
-      <div className='character-creation-screen'>
+      <div>
         <h2>Choose the name of your character:</h2>
         <input
+          className='w-80 bg-primary-50 placeholder:italic p-1 placeholder: text-slate-400 border border-primary-600 dark:border-primary-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-sky-500 focus:ring-1 sm:text-sm'
           value={tempChar.name}
           onChange={handleTextAreaChange}
           disabled={status === "submitting"}
           placeholder='Something like Edward Kenway or Guts'
         />
-        <p>Remaining points: {points}</p>
+        <p className='mt-4'>Remaining points: {points}</p>
         <AttributeUpgrade
           tempChar={tempChar}
           setTempChar={setTempChar}
@@ -97,6 +98,7 @@ export default function CharacterCreationScreen() {
           setPoints={setPoints}
         />
         <button
+          className='border p-1 cursor-pointer border-black dark:border-white rounded-md enabled:hover:bg-primary-300 focus:border-primary-600 disabled:text-gray-400 disabled:border-gray-400'
           onClick={handleSubmit}
           disabled={
             tempChar.name.length === 0 ||
@@ -107,15 +109,25 @@ export default function CharacterCreationScreen() {
           Create
         </button>
         {error !== null && (
-          <p className='create-character-error'>{error.message}</p>
+          <p className='border-1 md:border-2 border-orange-700'>
+            {error.message}
+          </p>
         )}
       </div>
     );
   } else {
     return (
-      <div className='character-creation-screen'>
-        <p>Character created: {character.name}</p>
-        <button onClick={nextGameState}>Continue</button>
+      <div>
+        <p>
+          Character created:{" "}
+          <span className='font-semibold'>{character.name}</span>
+        </p>
+        <button
+          className='p-1 mt-2 border border-black dark:border-white rounded-md hover:bg-primary-300 focus:border-primary-600 text-center'
+          onClick={nextGameState}
+        >
+          Continue
+        </button>
       </div>
     );
   }

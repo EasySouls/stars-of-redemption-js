@@ -22,7 +22,7 @@ export default function CharacterScreen(props) {
   }, [character.exp, character.expNext]);
 
   return (
-    <div className='character-screen'>
+    <div>
       <h1>Character</h1>
       <div className='character-screen-attributes'>
         <div className='attribute-item' style={borderStyle}>

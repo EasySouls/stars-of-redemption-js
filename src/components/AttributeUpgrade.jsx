@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "./App";
 import AttributeUpgradePanel from "./AttributeUpgradePanel";
 
 export default function AttributeUpgrade({
@@ -8,13 +7,6 @@ export default function AttributeUpgrade({
   points,
   setPoints,
 }) {
-  const { darkTheme } = useContext(ThemeContext);
-
-  const borderStyle = {
-    border: darkTheme.enabled ? "solid 0.2rem white" : "solid 0.2rem black",
-    borderRadius: "10px",
-  };
-
   function handleUpgrade(incrementing, attr) {
     if (!incrementing && tempChar[attr] > 0) {
       setPoints(++points);
@@ -26,9 +18,8 @@ export default function AttributeUpgrade({
   }
 
   return (
-    <div className='attribute-container'>
+    <div className='mt-8 flex flex-row justify-evenly text-center'>
       <AttributeUpgradePanel
-        borderStyle={borderStyle}
         handleUpgrade={handleUpgrade}
         attribute={"strength"}
       >
@@ -37,7 +28,6 @@ export default function AttributeUpgrade({
         {tempChar.strength}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
-        borderStyle={borderStyle}
         handleUpgrade={handleUpgrade}
         attribute={"dexterity"}
       >
@@ -46,7 +36,6 @@ export default function AttributeUpgrade({
         {tempChar.dexterity}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
-        borderStyle={borderStyle}
         handleUpgrade={handleUpgrade}
         attribute={"constitution"}
       >
@@ -55,7 +44,6 @@ export default function AttributeUpgrade({
         {tempChar.constitution}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
-        borderStyle={borderStyle}
         handleUpgrade={handleUpgrade}
         attribute={"intelligence"}
       >
@@ -63,17 +51,12 @@ export default function AttributeUpgrade({
         <br />
         {tempChar.intelligence}
       </AttributeUpgradePanel>
-      <AttributeUpgradePanel
-        borderStyle={borderStyle}
-        handleUpgrade={handleUpgrade}
-        attribute={"wisdom"}
-      >
+      <AttributeUpgradePanel handleUpgrade={handleUpgrade} attribute={"wisdom"}>
         <p>Wisdom</p>
         <br />
         {tempChar.wisdom}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
-        borderStyle={borderStyle}
         handleUpgrade={handleUpgrade}
         attribute={"charisma"}
       >

@@ -3,22 +3,14 @@ import { GameStateContext, ThemeContext } from "./App";
 
 export default function NavButton({ to }) {
   const { gameState, setGameState } = useContext(GameStateContext);
-  const { darkTheme } = useContext(ThemeContext);
 
   function goTo() {
     setGameState(to);
   }
 
-  const buttonStyle = {
-    border: darkTheme.enabled ? "solid 0.1rem white" : "solid 0.1rem black",
-    borderRadius: "0.3rem",
-    backgroundColor: darkTheme.enabled ? "white" : "black",
-    color: darkTheme.enabled ? "black" : "white",
-  };
-
   return (
     <button
-      className='flex-auto items-start justify-evenly bg-primary-700 text-black hover:bg-primary-600'
+      className='flex-auto items-start justify-evenly bg-primary-700 text-black hover:bg-primary-600 cursor-pointer'
       onClick={goTo}
       disabled={gameState === "character-creation"}
     >

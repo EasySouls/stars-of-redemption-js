@@ -35,5 +35,5 @@ export default function MainScreen() {
     }
   }
   // Renders based on the game state
-  return <div className=''>{renderSwitch()}</div>;
+  return <div className='w-full h-full p-4'>{renderSwitch()}</div>;
 }

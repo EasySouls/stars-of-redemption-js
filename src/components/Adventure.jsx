@@ -32,15 +32,20 @@ export default function Adventure() {
   function showNextNode(textNodeIndex) {}
 
   return gameStarted ? (
-    <div className='adventure'>
+    <div>
       <h1>Adventure</h1>
       <div className='text'>Text</div>
       <div className='option-buttons'></div>
     </div>
   ) : (
-    <div className='adventure'>
+    <div>
       <h2>Start you adventure</h2>
-      <button onClick={startGame}>Click here</button>
+      <button
+        className='p-1 mt-2 border border-black dark:border-white rounded-md hover:bg-primary-300 focus:border-primary-600 text-center'
+        onClick={startGame}
+      >
+        Click here
+      </button>
     </div>
   );
 }

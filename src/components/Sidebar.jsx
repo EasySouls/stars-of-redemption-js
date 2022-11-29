@@ -6,7 +6,7 @@ import CharacterPanel from "./CharacterPanel";
 
 export default function Sidebar({ changeTheme, themeIcon, borderStyle }) {
   return (
-    <div className='sidebar' style={borderStyle}>
+    <div className='flex flex-col p-2 w-1/5 h-full' style={borderStyle}>
       <ChangeThemeButton onClick={changeTheme} icon={themeIcon} />
       <CharacterPanel />
     </div>
