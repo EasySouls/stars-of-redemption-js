@@ -20,4 +20,4 @@ export const auth = getAuth(app);
 const analytics = getAnalytics(app);
 logEvent(analytics, "notification_received");
 
-const database = getDatabase(app);
+export const database = getDatabase(app);

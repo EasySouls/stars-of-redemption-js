@@ -11,7 +11,7 @@ export default function CharacterPanel(props) {
       <p>Name: {c.name}</p>
       <p>Level: {c.level}</p>
       <p>
-        HP: {c.hp}/{c.hpMax}
+        HP: {c.currentHp}/{c.hpMax}
       </p>
       {/*<p>Strength: {c.strength}</p>
       <p>Dexterity: {c.dexterity}</p>

@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
 import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
+import { writeCharacterData, readCharacterData } from "../firebase/database";
+import { useAuth } from "../contexts/AuthContext";
 
 const temporaryCharacter = {
   name: "",
   level: 0,
   hpMax: 0,
-  hp: 0,
+  currentHp: 0,
   encumbrence: 0,
   encumbrenceMax: 0,
   strength: 10,
@@ -25,6 +27,8 @@ export default function CharacterCreationScreen() {
   const [tempChar, setTempChar] = useState(temporaryCharacter);
   const [points, setPoints] = useState(14);
 
+  const { currentUser } = useAuth();
+
   const { character, setCharacter } = useContext(CharacterContext);
   const { setGameState } = useContext(GameStateContext);
 
@@ -33,11 +37,11 @@ export default function CharacterCreationScreen() {
     setStatus("submitting");
     try {
       await submitForm(tempChar.name);
-      setCharacter({
+      await setCharacter({
         name: tempChar.name,
         level: 1,
         hpMax: 10 + tempChar.constitution * 2,
-        hp: 10 + tempChar.constitution * 2,
+        currentHp: 10 + tempChar.constitution * 2,
         encumbrenceMax: 10 + tempChar.strength * 5,
         encumbrence: character.encumbrenceMax,
         strength: tempChar.strength,
@@ -58,6 +62,8 @@ export default function CharacterCreationScreen() {
 
   function nextGameState() {
     setGameState("adventure");
+
+    writeCharacterData(currentUser, character);
   }
 
   function handleTextAreaChange(e) {

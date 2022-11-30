@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-import { CharacterContext, ThemeContext } from "./App";
+import { CharacterContext } from "./App";
 
 export default function CharacterScreen(props) {
   const { character } = useContext(CharacterContext);
-  const { borderStyle } = useContext(ThemeContext);
   const [canUpgrade, setCanUpgrade] = useState(false);
 
   const descriptions = {
@@ -25,37 +24,37 @@ export default function CharacterScreen(props) {
     <div>
       <h1>Character</h1>
       <div className='character-screen-attributes'>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Strength: {character.strength}{" "}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.strength}
         </div>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Dexterity: {character.dexterity}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.dexterity}
         </div>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Constitutuion: {character.constitution}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.constitution}
         </div>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Intelligence: {character.intelligence}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.intelligence}
         </div>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Wisdom: {character.wisdom}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.wisdom}
         </div>
-        <div className='attribute-item' style={borderStyle}>
+        <div className='attribute-item'>
           Charisma: {character.charisma}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />

@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { CharacterContext } from "./App";
+import { readCharacterData } from "../firebase/database";
+import { useAuth } from "../contexts/AuthContext";
 
 const textNodes = [
   {
@@ -20,6 +22,7 @@ const textNodes = [
 
 export default function Adventure() {
   const { character, setCharacter } = useContext(CharacterContext);
+  const { currentUser } = useAuth();
 
   const [gameStarted, setGameStarted] = useState(false);
   const [adventureState, setAdventureState] = useState({});
