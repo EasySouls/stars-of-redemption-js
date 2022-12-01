@@ -34,13 +34,14 @@ export function readCharacterData(currentUser, index) {
       if (snapshot.exists()) {
         const characters = snapshot.val();
         console.log(characters);
-        if (characters[index] !== null) return characters[index];
+        const chararacterValues = Object.values(characters);
+        const character = Object.entries(chararacterValues[index]);
+        console.log(character);
       } else {
         console.log("No data available");
       }
     })
     .catch((error) => {
       console.error(error);
-      console.log("error");
     });
 }

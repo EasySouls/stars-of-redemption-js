@@ -30,6 +30,9 @@ export default function Adventure() {
   function startGame() {
     setGameStarted((prev) => !prev);
     showNextNode(1);
+
+    console.log(currentUser.email);
+    readCharacterData(currentUser, 2);
   }
 
   function showNextNode(textNodeIndex) {}
