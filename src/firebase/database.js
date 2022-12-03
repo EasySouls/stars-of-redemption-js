@@ -23,20 +23,18 @@ export function writeCharacterData(currentUser, c) {
   });
 }
 
-//! retrieves undefined with the index
-export function readCharacterData(currentUser, index) {
+export function setCharacterFromDatabase(currentUser, index, setCharacter) {
   const userName = currentUser.email.split("@")[0];
-  console.log(`users/${userName}/characters`);
   const characterRefs = ref(database, `users/${userName}/characters`);
 
   get(characterRefs)
     .then((snapshot) => {
       if (snapshot.exists()) {
         const characters = snapshot.val();
-        console.log(characters);
-        const chararacterValues = Object.values(characters);
-        const character = Object.entries(chararacterValues[index]);
-        console.log(character);
+        const characterNames = Object.keys(characters);
+        const characterName = characterNames[index];
+        const character = characters[characterName];
+        setCharacter(character);
       } else {
         console.log("No data available");
       }

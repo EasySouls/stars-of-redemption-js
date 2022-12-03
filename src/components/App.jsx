@@ -1,6 +1,7 @@
 import "../App.css";
 import React, { createContext, useState, useEffect } from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
+import useLocalStorage from "../hooks/useLocalStorage";
 import Sidebar from "./Sidebar";
 import lightIcon from "../icons/light-icon.png";
 import darkIcon from "../icons/dark-icon.png";
@@ -35,9 +36,20 @@ const initialCharacter = {
 };
 
 function App() {
-  const [character, setCharacter] = useState(initialCharacter);
+  // useLocalStorage custom hook, so the character can be read on a page refresh
+  const [character, setCharacter] = useLocalStorage(
+    "currentCharacter",
+    initialCharacter
+  );
 
-  const [gameState, setGameState] = useState("character-creation");
+  // const [gameState, setGameState] = useLocalStorage("character-creation")
+
+  // The game state uses the local storage, so the game would't be
+  // reloaded on a page refresh
+  const [gameState, setGameState] = useLocalStorage(
+    "Game state",
+    "character-creation"
+  );
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,

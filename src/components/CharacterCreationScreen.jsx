@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
-import { writeCharacterData, readCharacterData } from "../firebase/database";
+import { writeCharacterData } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
 
 const temporaryCharacter = {

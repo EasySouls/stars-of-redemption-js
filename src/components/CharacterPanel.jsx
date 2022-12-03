@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 import { CharacterContext } from "./App";
 
-export default function CharacterPanel(props) {
+export default function CharacterPanel() {
   const { character } = useContext(CharacterContext);
-  const c = character;
 
   return (
     <div>
       <b style={{ fontSize: "24px" }}>Character</b>
-      <p>Name: {c.name}</p>
-      <p>Level: {c.level}</p>
+      <p>Name: {character.name}</p>
+      <p>Level: {character.level}</p>
       <p>
-        HP: {c.currentHp}/{c.hpMax}
+        HP: {character.currentHp}/{character.hpMax}
       </p>
       {/*<p>Strength: {c.strength}</p>
       <p>Dexterity: {c.dexterity}</p>
@@ -20,7 +19,7 @@ export default function CharacterPanel(props) {
       <p>Wisdom: {c.wisdom}</p>
   <p>Charisma: {c.charisma}</p>*/}
       <p>
-        Encumbrence: {c.encumbrence}/{c.encumbrenceMax}
+        Encumbrence: {character.encumbrence}/{character.encumbrenceMax}
       </p>
     </div>
   );
