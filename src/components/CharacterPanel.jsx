@@ -6,7 +6,7 @@ export default function CharacterPanel() {
 
   return (
     <div>
-      <b style={{ fontSize: "24px" }}>Character</b>
+      <h1 className='text-base lg:text-xl font-bold'>Character</h1>
       <p>Name: {character.name}</p>
       <p>Level: {character.level}</p>
       <p>

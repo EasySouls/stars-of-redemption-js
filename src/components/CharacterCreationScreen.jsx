@@ -90,7 +90,7 @@ export default function CharacterCreationScreen() {
       <div>
         <h2>Choose the name of your character:</h2>
         <input
-          className='w-80 bg-primary-50 placeholder:italic p-1 placeholder: text-slate-400 border border-primary-600 dark:border-primary-300 rounded-md shadow-sm focus:border-primary-500 focus:ring-sky-500 focus:ring-1 sm:text-sm'
+          className='w-80 text-black bg-primary placeholder:italic p-1 placeholder:text-slate-400 border border-primary-dark dark:border-primary rounded-md shadow-sm focus:border-primary dark:focus:border-primary-light focus:ring-primary-light focus:ring-1 sm:text-sm'
           value={tempChar.name}
           onChange={handleTextAreaChange}
           disabled={status === "submitting"}
@@ -115,7 +115,7 @@ export default function CharacterCreationScreen() {
           Create
         </button>
         {error !== null && (
-          <p className='border-1 md:border-2 border-orange-700'>
+          <p className='border-1 md:border-2 border-primary-dark'>
             {error.message}
           </p>
         )}

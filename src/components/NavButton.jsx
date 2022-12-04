@@ -10,7 +10,7 @@ export default function NavButton({ to }) {
 
   return (
     <button
-      className='flex-auto items-start justify-evenly bg-primary-700 text-black enabled:hover:bg-primary-600 cursor-pointer'
+      className='flex-auto items-start justify-evenly bg-primary text-black enabled:hover:bg-primary-light cursor-pointer'
       onClick={goTo}
       disabled={gameState === "character-creation"}
     >

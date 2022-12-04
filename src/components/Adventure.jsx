@@ -41,6 +41,8 @@ const textNodes = [
   },
 ];
 
+//todo do not use local storage for the states, but use the firebase read/write
+
 export default function Adventure() {
   const { character, setCharacter } = useContext(CharacterContext);
 
@@ -49,17 +51,19 @@ export default function Adventure() {
     "Adventure state",
     {}
   );
+  const [currentNode, setCurrentNode] = useLocalStorage("currentNode", 1);
 
   const [text, setText] = useState("Text");
   const [options, setOptions] = useState([]);
 
   function startGame() {
     setGameStarted((prev) => !prev);
-    showTextNode(1);
+    showTextNode(currentNode);
   }
 
   function showTextNode(textNodeIndex) {
     const textNode = textNodes.find((textNode) => textNode.id == textNodeIndex);
+    setCurrentNode(textNode.id);
     setOptions(textNode.options);
     setText(textNode.text);
   }
@@ -82,14 +86,14 @@ export default function Adventure() {
 
   return gameStarted ? (
     <div className='flex w-full h-full flex-col'>
-      <h1 className='justify-self-center'>Adventure</h1>
+      <h1 className='text-center mb-5'>Adventure</h1>
       <div className=''>{text}</div>
       <div className='flex h-fit w-fit'>
         {options.map((option, id) => {
           if (showOption(option)) {
             return (
               <button
-                className='p-1 m-2 border border-black dark:border-white rounded-md hover:bg-primary-300 hover:border-primary-600 text-center'
+                className='p-1 m-2 border border-black dark:border-white rounded-md hover:bg-primary-light  text-center'
                 key={id}
                 onClick={() => selectOption(option)}
               >
@@ -104,7 +108,7 @@ export default function Adventure() {
     <div>
       <h2>Start you adventure</h2>
       <button
-        className='p-1 mt-2 border border-black dark:border-white rounded-md hover:bg-primary-300 focus:border-primary-600 text-center'
+        className='p-1 mt-2 border border-black dark:border-white rounded-md hover:bg-primary-light text-center'
         onClick={startGame}
       >
         Click here

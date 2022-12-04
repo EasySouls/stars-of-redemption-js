@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
       });
   }
 
-  function login(email, password) {
+  async function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         //Signed in
@@ -51,7 +51,7 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
-  function resetPassword(email) {
+  async function resetPassword(email) {
     return sendPasswordResetEmail(auth, email).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;

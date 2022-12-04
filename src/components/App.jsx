@@ -121,7 +121,7 @@ function App() {
                   path='/'
                   element={
                     <PrivateRoute>
-                      <div className='flex flex-col w-screen h-screen font-serif text-black dark:text-white bg-white dark:bg-primary-800'>
+                      <div className='flex flex-col w-screen h-screen font-serif text-black dark:text-white bg-white dark:bg-black'>
                         <div>
                           <Navbar />
                         </div>

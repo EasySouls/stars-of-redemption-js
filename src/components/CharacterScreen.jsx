@@ -21,40 +21,40 @@ export default function CharacterScreen(props) {
   }, [character.exp, character.expNext]);
 
   return (
-    <div>
-      <h1>Character</h1>
-      <div className='character-screen-attributes'>
-        <div className='attribute-item'>
+    <div className='w-full h-full'>
+      <h1 className='text-center mb-5'>Character</h1>
+      <div className='grid gap-x-2 gap-y-4 lg:gap-x-4 lg:gap-y-8 grid-flow-row  grid-cols-3 justify-around'>
+        <div className='border border-black p-2'>
           Strength: {character.strength}{" "}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.strength}
         </div>
-        <div className='attribute-item'>
+        <div className='border border-black p-2'>
           Dexterity: {character.dexterity}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.dexterity}
         </div>
-        <div className='attribute-item'>
+        <div className='border border-black p-2'>
           Constitutuion: {character.constitution}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.constitution}
         </div>
-        <div className='attribute-item'>
+        <div className='border border-black p-2'>
           Intelligence: {character.intelligence}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.intelligence}
         </div>
-        <div className='attribute-item'>
+        <div className='border border-black p-2'>
           Wisdom: {character.wisdom}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
           {descriptions.wisdom}
         </div>
-        <div className='attribute-item'>
+        <div className='border border-black p-2'>
           Charisma: {character.charisma}
           {canUpgrade ? <button>Upgrade</button> : null}
           <br />
