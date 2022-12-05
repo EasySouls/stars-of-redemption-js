@@ -4,6 +4,7 @@ import CharacterCreationScreen from "./CharacterCreationScreen";
 import { GameStateContext } from "./App";
 import Adventure from "./Adventure";
 import Encyclopedia from "./Encyclopedia";
+import BattleScreen from "./BattleScreen";
 
 export default function MainScreen() {
   const { gameState } = useContext(GameStateContext);
@@ -21,6 +22,9 @@ export default function MainScreen() {
 
       case "encyclopedia":
         return <Encyclopedia />;
+
+      case "battle":
+        return <BattleScreen />;
 
       case "settings":
         return <div>settings</div>;

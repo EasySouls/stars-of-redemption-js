@@ -24,7 +24,6 @@ export default function AttributeUpgrade({
         attribute={"strength"}
       >
         <p>Strength</p>
-        <br />
         {tempChar.strength}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
@@ -32,7 +31,6 @@ export default function AttributeUpgrade({
         attribute={"dexterity"}
       >
         <p>Dexterity</p>
-        <br />
         {tempChar.dexterity}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
@@ -40,7 +38,6 @@ export default function AttributeUpgrade({
         attribute={"constitution"}
       >
         <p>Constitution</p>
-        <br />
         {tempChar.constitution}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
@@ -48,12 +45,10 @@ export default function AttributeUpgrade({
         attribute={"intelligence"}
       >
         <p>Intelligence</p>
-        <br />
         {tempChar.intelligence}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel handleUpgrade={handleUpgrade} attribute={"wisdom"}>
         <p>Wisdom</p>
-        <br />
         {tempChar.wisdom}
       </AttributeUpgradePanel>
       <AttributeUpgradePanel
@@ -61,7 +56,6 @@ export default function AttributeUpgrade({
         attribute={"charisma"}
       >
         <p>Charisma</p>
-        <br />
         {tempChar.charisma}
       </AttributeUpgradePanel>
     </div>

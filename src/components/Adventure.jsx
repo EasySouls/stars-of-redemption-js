@@ -2,44 +2,7 @@ import React, { useContext, useState } from "react";
 import { CharacterContext } from "./App";
 import { useAuth } from "../contexts/AuthContext";
 import useLocalStorage from "../hooks/useLocalStorage";
-
-const textNodes = [
-  {
-    id: 1,
-    text: "You wake up under a tree.",
-    options: [
-      {
-        text: "Sleep back",
-        nextText: 2,
-      },
-      {
-        text: "Get up",
-        setState: { armor: true },
-        nextText: 2,
-      },
-    ],
-  },
-  {
-    id: 2,
-    text: "As you stand up, you feel a sudden thought rush through your head.",
-    options: [
-      {
-        text: "Calm yourself",
-        nextText: 3,
-      },
-      {
-        text: "Concentrate on the thought",
-        nextText: 4,
-      },
-      {
-        text: "Don your armor",
-        requiredState: (currentState) => currentState.armor,
-        setState: { armor: false },
-        nextText: 3,
-      },
-    ],
-  },
-];
+import { textNodes } from "../adventureDialogues";
 
 //todo do not use local storage for the states, but use the firebase read/write
 
@@ -51,7 +14,7 @@ export default function Adventure() {
     "Adventure state",
     {}
   );
-  const [currentNode, setCurrentNode] = useLocalStorage("currentNode", 1);
+  const [currentNode, setCurrentNode] = useState(1);
 
   const [text, setText] = useState("Text");
   const [options, setOptions] = useState([]);

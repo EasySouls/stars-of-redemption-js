@@ -6,6 +6,7 @@ export default function Navbar() {
     <nav className='w-100 flex h-10 flex-initial'>
       <NavButton to='character-screen' />
       <NavButton to='adventure' />
+      <NavButton to='battle' />
       <NavButton to='encyclopedia' />
       <NavButton to='settings' />
       <NavButton to='menu' />
