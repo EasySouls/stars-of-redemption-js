@@ -3,6 +3,7 @@ import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
 import { writeCharacterData } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
+import Character from "../classes/Character";
 
 const temporaryCharacter = {
   name: "",
@@ -36,23 +37,10 @@ export default function CharacterCreationScreen() {
     e.preventDefault();
     setStatus("submitting");
     try {
+      //! not done
       await submitForm(tempChar.name);
-      await setCharacter({
-        name: tempChar.name,
-        level: 1,
-        hpMax: 10 + tempChar.constitution * 2,
-        currentHp: 10 + tempChar.constitution * 2,
-        encumbrenceMax: 10 + tempChar.strength * 5,
-        encumbrence: character.encumbrenceMax,
-        strength: tempChar.strength,
-        dexterity: tempChar.dexterity,
-        constitution: tempChar.constitution,
-        intelligence: tempChar.intelligence,
-        wisdom: tempChar.wisdom,
-        charisma: tempChar.charisma,
-        exp: 0,
-        expNext: 100,
-      });
+      const character = new Character();
+      await setCharacter(character);
       setStatus("success");
     } catch (err) {
       setStatus("typing");

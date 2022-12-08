@@ -14,26 +14,13 @@ import { AuthProvider } from "../contexts/AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
+import Character from "../classes/Character";
 
 export const CharacterContext = createContext();
 export const GameStateContext = createContext();
 
-const initialCharacter = {
-  name: "",
-  level: 0,
-  hpMax: 0,
-  currentHp: 0,
-  encumbrence: 0,
-  encumbrenceMax: 0,
-  strength: 0,
-  dexterity: 0,
-  constitution: 0,
-  intelligence: 0,
-  wisdom: 0,
-  charisma: 0,
-  exp: 0,
-  expNext: 0,
-};
+//* Make this a class
+const initialCharacter = new Character("", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true);
 
 function App() {
   // useLocalStorage custom hook, so the character can be read on a page refresh
