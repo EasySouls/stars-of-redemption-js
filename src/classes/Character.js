@@ -21,17 +21,17 @@ export default class Character {
   isAlive = true;
 
   constructor(
-    name,
-    level,
-    hp,
-    encumbrence,
-    strength,
-    dexterity,
-    constitution,
-    intelligence,
-    wisdom,
-    charisma,
-    exp,
+    name = "",
+    level = 0,
+    hp = 0,
+    encumbrence = 0,
+    strength = 0,
+    dexterity = 0,
+    constitution = 0,
+    intelligence = 0,
+    wisdom = 0,
+    charisma = 0,
+    exp = 0,
     isFirstTimeInitiated = false
   ) {
     this.name = name;

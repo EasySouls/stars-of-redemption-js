@@ -1,32 +1,31 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
-import { writeCharacterData } from "../firebase/database";
+import { saveCharacterData } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
 import Character from "../classes/Character";
 
-const temporaryCharacter = {
-  name: "",
-  level: 0,
-  hpMax: 0,
-  currentHp: 0,
-  encumbrence: 0,
-  encumbrenceMax: 0,
-  strength: 10,
-  dexterity: 10,
-  constitution: 10,
-  intelligence: 10,
-  wisdom: 10,
-  charisma: 10,
-  exp: 0,
-  expNext: 0,
-};
+const temporaryCharacter = new Character(
+  "",
+  1,
+  0,
+  0,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  true
+);
 
 export default function CharacterCreationScreen() {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("typing"); // 'typing', 'submitting' or 'success'
   const [tempChar, setTempChar] = useState(temporaryCharacter);
   const [points, setPoints] = useState(14);
+
+  const nameRef = useRef("name");
 
   const { currentUser } = useAuth();
 
@@ -37,10 +36,23 @@ export default function CharacterCreationScreen() {
     e.preventDefault();
     setStatus("submitting");
     try {
-      //! not done
-      await submitForm(tempChar.name);
-      const character = new Character();
-      await setCharacter(character);
+      console.log(nameRef.current.value);
+      await submitForm(nameRef.current.value);
+      const _character = new Character(
+        nameRef.current.value,
+        1,
+        0,
+        0,
+        tempChar.strength,
+        tempChar.dexterity,
+        tempChar.constitution,
+        tempChar.intelligence,
+        tempChar.wisdom,
+        tempChar.charisma,
+        0,
+        true
+      );
+      await setCharacter(_character);
       setStatus("success");
     } catch (err) {
       setStatus("typing");
@@ -48,16 +60,13 @@ export default function CharacterCreationScreen() {
     }
   }
 
+  // Forwards to the next game game state and saves the character to the database
   function nextGameState() {
     setGameState("adventure");
-
-    writeCharacterData(currentUser, character);
+    saveCharacterData(currentUser, character);
   }
 
-  function handleTextAreaChange(e) {
-    setTempChar({ ...tempChar, name: e.target.value });
-  }
-
+  // Checks if the name given by the user is valid
   function submitForm(name) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -69,7 +78,7 @@ export default function CharacterCreationScreen() {
         } else {
           resolve();
         }
-      }, 1000);
+      }, 500);
     });
   }
 
@@ -78,9 +87,8 @@ export default function CharacterCreationScreen() {
       <div>
         <h2>Choose the name of your character:</h2>
         <input
-          className='w-80 text-black bg-primary placeholder:italic p-1 placeholder:text-slate-400 border border-primary-dark dark:border-primary rounded-md shadow-sm focus:border-primary dark:focus:border-primary-light focus:ring-primary-light focus:ring-1 sm:text-sm'
-          value={tempChar.name}
-          onChange={handleTextAreaChange}
+          className='w-80 text-black placeholder:italic p-1 placeholder:text-slate-400 border border-primary-dark dark:border-primary rounded-md sm:text-sm outline-none'
+          ref={nameRef}
           disabled={status === "submitting"}
           placeholder='Something like Edward Kenway or Guts'
         />
@@ -94,11 +102,7 @@ export default function CharacterCreationScreen() {
         <button
           className='border p-1 cursor-pointer border-black dark:border-white rounded-md enabled:hover:bg-primary-300 focus:border-primary-600 disabled:text-gray-400 disabled:border-gray-400'
           onClick={handleSubmit}
-          disabled={
-            tempChar.name.length === 0 ||
-            status === "submitting" ||
-            points !== 0
-          }
+          disabled={status === "submitting" || points !== 0}
         >
           Create
         </button>

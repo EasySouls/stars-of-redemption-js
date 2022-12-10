@@ -3,7 +3,7 @@ import { database } from "./firebase";
 import { set, ref, get } from "firebase/database";
 import Character from "../classes/Character";
 
-export function writeCharacterData(currentUser, c) {
+export function saveCharacterData(currentUser, c) {
   const userName = currentUser.email.split("@")[0];
   const characterRef = ref(database, `users/${userName}/characters/${c.name}`);
   set(characterRef, {

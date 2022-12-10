@@ -19,8 +19,7 @@ import Character from "../classes/Character";
 export const CharacterContext = createContext();
 export const GameStateContext = createContext();
 
-//* Make this a class
-const initialCharacter = new Character("", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, true);
+const initialCharacter = new Character();
 
 function App() {
   // useLocalStorage custom hook, so the character can be read on a page refresh
@@ -29,14 +28,14 @@ function App() {
     initialCharacter
   );
 
-  // const [gameState, setGameState] = useLocalStorage("character-creation")
+  const [gameState, setGameState] = useState("character-creation");
 
   // The game state uses the local storage, so the game would't be
   // reloaded on a page refresh
-  const [gameState, setGameState] = useLocalStorage(
-    "Game state",
-    "character-creation"
-  );
+  // const [gameState, setGameState] = useLocalStorage(
+  //   "Game state",
+  //   "character-creation"
+  // );
 
   const [darkTheme, setDarkTheme] = useState({
     enabled: false,

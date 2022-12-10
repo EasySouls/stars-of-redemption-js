@@ -78,7 +78,7 @@ export default function Login() {
           <div>
             <input
               type='checkbox'
-              className='text-primary border border-primary accent-primary appearance-none'
+              className='text-primary border border-primary accent-primary'
             />
             <p className='inline mx-2'>Remember me</p>
           </div>

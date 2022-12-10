@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import CharacterScreen from "./CharacterScreen";
-import CharacterCreationScreen from "./CharacterCreationScreen";
+import React, { useContext, lazy, Suspense } from "react";
 import { GameStateContext } from "./App";
-import Adventure from "./Adventure";
-import Encyclopedia from "./Encyclopedia";
-import BattleScreen from "./BattleScreen";
+import LoadingScreen from "./LoadingScreen";
+
+const CharacterCreationScreen = lazy(() => import("./CharacterCreationScreen"));
+const CharacterScreen = lazy(() => import("./CharacterScreen"));
+const Adventure = lazy(() => import("./Adventure"));
+const Encyclopedia = lazy(() => import("./Encyclopedia"));
+const BattleScreen = lazy(() => import("./BattleScreen"));
 
 export default function MainScreen() {
   const { gameState } = useContext(GameStateContext);
@@ -39,5 +41,9 @@ export default function MainScreen() {
     }
   }
   // Renders based on the game state
-  return <div className='w-full h-full p-4'>{renderSwitch()}</div>;
+  return (
+    <Suspense fallback={<LoadingScreen />}>
+      <div className='w-full h-full p-4'>{renderSwitch()}</div>
+    </Suspense>
+  );
 }
