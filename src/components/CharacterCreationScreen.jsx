@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from "react";
 import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
-import { saveCharacterData } from "../firebase/database";
+import { saveCharacterData, saveCurrentCharacter } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
 import Character from "../classes/Character";
 
@@ -64,6 +64,7 @@ export default function CharacterCreationScreen() {
   function nextGameState() {
     setGameState("adventure");
     saveCharacterData(currentUser, character);
+    saveCurrentCharacter(currentUser, character);
   }
 
   // Checks if the name given by the user is valid

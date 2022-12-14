@@ -2,11 +2,21 @@ import React, { useContext, lazy, Suspense } from "react";
 import { GameStateContext } from "./App";
 import LoadingScreen from "./LoadingScreen";
 
-const CharacterCreationScreen = lazy(() => import("./CharacterCreationScreen"));
-const CharacterScreen = lazy(() => import("./CharacterScreen"));
-const Adventure = lazy(() => import("./Adventure"));
-const Encyclopedia = lazy(() => import("./Encyclopedia"));
-const BattleScreen = lazy(() => import("./BattleScreen"));
+const CharacterCreationScreen = lazy(() =>
+  wait(500).then(() => import("./CharacterCreationScreen"))
+);
+const CharacterScreen = lazy(() =>
+  wait(500).then(() => import("./CharacterScreen"))
+);
+const Adventure = lazy(() => wait(500).then(() => import("./Adventure")));
+const Encyclopedia = lazy(() => wait(500).then(() => import("./Encyclopedia")));
+const BattleScreen = lazy(() => wait(500).then(() => import("./BattleScreen")));
+
+function wait(time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
 
 export default function MainScreen() {
   const { gameState } = useContext(GameStateContext);

@@ -3,21 +3,24 @@ import { database } from "./firebase";
 import { set, ref, get } from "firebase/database";
 import Character from "../classes/Character";
 
-export function saveCharacterData(currentUser, c) {
+export function saveCharacterData(currentUser, char) {
   const userName = currentUser.email.split("@")[0];
-  const characterRef = ref(database, `users/${userName}/characters/${c.name}`);
+  const characterRef = ref(
+    database,
+    `users/${userName}/characters/${char.name}`
+  );
   set(characterRef, {
-    name: c.name,
-    level: c.level,
-    currentHp: c.currentHp,
-    encumbrence: c.encumbrence,
-    strength: c.strength,
-    dexterity: c.dexterity,
-    constitution: c.constitution,
-    intelligence: c.intelligence,
-    wisdom: c.wisdom,
-    charisma: c.charisma,
-    exp: c.exp,
+    name: char.name,
+    level: char.level,
+    currentHp: char.currentHp,
+    encumbrence: char.encumbrence,
+    strength: char.strength,
+    dexterity: char.dexterity,
+    constitution: char.constitution,
+    intelligence: char.intelligence,
+    wisdom: char.wisdom,
+    charisma: char.charisma,
+    exp: char.exp,
   });
 }
 
@@ -31,18 +34,18 @@ export function loadCharacterFromDatabase(currentUser, index, setCharacter) {
         const characters = snapshot.val();
         const characterNames = Object.keys(characters);
         const characterName = characterNames[index];
-        const c = characters[characterName];
+        const char = characters[characterName];
         const loadedCharacter = new Character(
-          c.name,
-          c.level,
-          c.currentHp,
-          c.encumbrence,
-          c.strength,
-          c.constitution,
-          c.intelligence,
-          c.wisdom,
-          c.charisma,
-          c.exp
+          char.name,
+          char.level,
+          char.currentHp,
+          char.encumbrence,
+          char.strength,
+          char.constitution,
+          char.intelligence,
+          char.wisdom,
+          char.charisma,
+          char.exp
         );
         setCharacter(loadedCharacter);
       } else {
@@ -51,5 +54,57 @@ export function loadCharacterFromDatabase(currentUser, index, setCharacter) {
     })
     .catch((error) => {
       console.error(error);
+    });
+}
+
+export function saveCurrentCharacter(currentUser, character) {
+  const userName = currentUser.email.split("@")[0];
+  const characterRef = ref(database, `users/${userName}/currentCharacter`);
+  set(characterRef, character.name);
+}
+
+// Loads the character with the "currentCharacter" name
+export function loadCurrentCharacter(currentUser, setCharacter) {
+  const userName = currentUser.email.split("@")[0];
+  const characterRef = ref(database, `users/${userName}/currentCharacter`);
+  get(characterRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const userName = currentUser.email.split("@")[0];
+        const characterName = snapshot.val();
+
+        get(ref(database, `users/${userName}/characters`))
+          .then((snapshot) => {
+            const characters = snapshot.val();
+            const char = characters[characterName];
+            const currentChar = new Character(
+              char.name,
+              char.level,
+              char.currentHp,
+              char.encumbrence,
+              char.strength,
+              char.dexterity,
+              char.constitution,
+              char.intelligence,
+              char.wisdom,
+              char.charisma,
+              char.exp,
+              false
+            );
+            setCharacter(currentChar);
+          })
+          // Return a newly instantiated instance if a previous one wasn't found
+          .catch((error) => {
+            const newChar = new Character();
+            newChar.hpMax = 0;
+            newChar.encumbrenceMax = 0;
+            setCharacter(newChar);
+          });
+      } else {
+        console.log("No previous character has been set as current");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
     });
 }

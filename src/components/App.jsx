@@ -10,7 +10,8 @@ import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import Navbar from "./Navbar";
-import { AuthProvider } from "../contexts/AuthContext";
+import { loadCurrentCharacter } from "../firebase/database";
+import { useAuth } from "../contexts/AuthContext";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword";
 import UpdateProfile from "./UpdateProfile";
@@ -23,12 +24,13 @@ const initialCharacter = new Character();
 
 function App() {
   // useLocalStorage custom hook, so the character can be read on a page refresh
-  const [character, setCharacter] = useLocalStorage(
-    "currentCharacter",
-    initialCharacter
-  );
+  // const [character, setCharacter] = useLocalStorage(
+  //   "currentCharacter",
+  //   initialCharacter
+  // );
+  const [character, setCharacter] = useState(initialCharacter);
 
-  const [gameState, setGameState] = useState("character-creation");
+  const [gameState, setGameState] = useState("battle");
 
   // The game state uses the local storage, so the game would't be
   // reloaded on a page refresh
@@ -42,6 +44,8 @@ function App() {
     icon: darkIcon,
   });
 
+  const { currentUser } = useAuth();
+
   function changeTheme() {
     setDarkTheme((prevTheme) => {
       if (prevTheme.enabled) localStorage.theme = "light";
@@ -54,6 +58,7 @@ function App() {
     });
   }
 
+  // sets the theme based on user preference
   useEffect(() => {
     if (
       localStorage.theme === "dark" ||
@@ -80,55 +85,57 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    loadCurrentCharacter(currentUser, setCharacter);
+  }, []);
+
   return (
     <div
       className={`w-screen h-screen text-xs lg:text-base ${
         darkTheme.enabled ? "dark" : ""
       }`}
     >
-      <AuthProvider>
-        <GameStateContext.Provider value={{ gameState, setGameState }}>
-          <CharacterContext.Provider value={{ character, setCharacter }}>
-            <HashRouter>
-              <Routes>
-                <Route
-                  path='/dashboard'
-                  element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/signup' element={<Signup />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/forgot-password' element={<ForgotPassword />} />
-                <Route
-                  exact
-                  path='/'
-                  element={
-                    <PrivateRoute>
-                      <div className='flex flex-col w-screen h-screen font-serif text-black dark:text-white bg-white dark:bg-black'>
-                        <div>
-                          <Navbar />
-                        </div>
-                        <div className='flex h-screen w-screen'>
-                          <Sidebar
-                            changeTheme={changeTheme}
-                            themeIcon={darkTheme.enabled ? lightIcon : darkIcon}
-                            character={character}
-                          />
-                          <MainScreen />
-                        </div>
+      <GameStateContext.Provider value={{ gameState, setGameState }}>
+        <CharacterContext.Provider value={{ character, setCharacter }}>
+          <HashRouter>
+            <Routes>
+              <Route
+                path='/dashboard'
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route path='/signup' element={<Signup />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/forgot-password' element={<ForgotPassword />} />
+              <Route
+                exact
+                path='/'
+                element={
+                  <PrivateRoute>
+                    <div className='flex flex-col w-screen h-screen font-serif text-black dark:text-white bg-white dark:bg-black'>
+                      <div>
+                        <Navbar />
                       </div>
-                    </PrivateRoute>
-                  }
-                />
-                <Route path='/update-profile' element={<UpdateProfile />} />
-              </Routes>
-            </HashRouter>
-          </CharacterContext.Provider>
-        </GameStateContext.Provider>
-      </AuthProvider>
+                      <div className='flex h-screen w-screen'>
+                        <Sidebar
+                          changeTheme={changeTheme}
+                          themeIcon={darkTheme.enabled ? lightIcon : darkIcon}
+                          character={character}
+                        />
+                        <MainScreen />
+                      </div>
+                    </div>
+                  </PrivateRoute>
+                }
+              />
+              <Route path='/update-profile' element={<UpdateProfile />} />
+            </Routes>
+          </HashRouter>
+        </CharacterContext.Provider>
+      </GameStateContext.Provider>
     </div>
   );
 }
