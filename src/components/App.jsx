@@ -86,6 +86,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (currentUser === null) return;
     loadCurrentCharacter(currentUser, setCharacter);
   }, []);
 

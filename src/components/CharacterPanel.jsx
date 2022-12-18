@@ -10,7 +10,7 @@ export default function CharacterPanel() {
       <p>Name: {character.name}</p>
       <p>Level: {character.level}</p>
       <p>
-        HP: {character.currentHp}/{character.hpMax}
+        HP: {character.currentHp}/{character.maxHp}
       </p>
       {/*<p>Strength: {c.strength}</p>
       <p>Dexterity: {c.dexterity}</p>

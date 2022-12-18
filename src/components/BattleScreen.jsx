@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { CharacterContext } from "./App";
-import EnemyCard from "./EnemyCard";
 import Enemy from "../classes/Enemy";
 import CharacterBattlePanel from "./CharacterBattlePanel";
+import EnemyBattlePanel from "./EnemyBattlePanel";
 import BattleDetails from "./BattleDetails";
 
 export default function BattleScreen() {
@@ -10,6 +10,7 @@ export default function BattleScreen() {
   const [currentEnemies, setCurrentEnemies] = useState([]);
   const [encounter, setEncounter] = useState();
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+  const [selected, setSelected] = useState();
 
   // Logic for creating the separate encounters
   function createEncounter(level) {
@@ -55,24 +56,21 @@ export default function BattleScreen() {
     <div className='w-full h-full flex flex-col items-center text-center'>
       <button
         className='w-fit h-fit text-base lg:text-lg mb-5 p-2 border border-black dark:border-white rounded-md'
-        onClick={() => createEncounter(10)}
+        onClick={() => createEncounter(3)}
       >
         Adventure
       </button>
-      <div className='w-full h-full flex flex-row items-center text-center'>
-        <div className='flex flex-col w-2/5 h-full'>
-          <div className='w-full h-full bg-primary'>
-            <CharacterBattlePanel />
-          </div>
-          <div className='grid gap-4 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 grid-flow-row w-full h-full overflow-clip bg-green-700'>
-            <p>Enemies</p>
-            {currentEnemies.map((enemy, id) => {
-              return <EnemyCard key={id} enemy={enemy} />;
-            })}
-          </div>
+      <div className='w-full h-full flex flex-row gap-2 items-center text-center'>
+        <div className='flex flex-col gap-2 w-2/5 h-full'>
+          <CharacterBattlePanel character={character} />
+          <EnemyBattlePanel
+            currentEnemies={currentEnemies}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </div>
-        <div className='w-3/5 h-full bg-blue-400'>
-          <BattleDetails />
+        <div className='w-3/5 h-full'>
+          <BattleDetails selected={selected} />
         </div>
       </div>
     </div>

@@ -52,4 +52,11 @@ export default class Enemy {
       this.isAlive = false;
     }
   }
+
+  heal(amount) {
+    this.currentHp += amount;
+    if (this.currentHp > this.maxHp) {
+      this.currentHp = this.maxHp;
+    }
+  }
 }

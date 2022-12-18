@@ -1,7 +1,8 @@
+import Spell, { Type, DamageType, School } from "../classes/Spell";
 export default class Character {
   name = "";
   level = 0;
-  hpMax = 0;
+  maxHp = 0;
   currentHp = 0;
   encumbrence = 0;
   encumbrenceMax = 0;
@@ -18,6 +19,9 @@ export default class Character {
   availableSkillPoints = 0;
   availableAttributePoints = 0;
 
+  spells = allSpells;
+  knownSpells = [];
+
   isAlive = true;
 
   constructor(
@@ -32,11 +36,12 @@ export default class Character {
     wisdom = 0,
     charisma = 0,
     exp = 0,
+    knownSpells = [],
     isFirstTimeInitiated = false
   ) {
     this.name = name;
     this.level = level;
-    this.hpMax = 6 + constitution * 2;
+    this.maxHp = 6 + constitution * 2;
     this.encumbrenceMax = 20 + strength * 3;
     this.strength = strength;
     this.dexterity = dexterity;
@@ -46,6 +51,7 @@ export default class Character {
     this.charisma = charisma;
     this.exp = exp;
     this.expNext = 100 + level * 150;
+    this.knownSpells = knownSpells;
 
     if (isFirstTimeInitiated) {
       this.currentHp = this.hpMax;
@@ -70,7 +76,7 @@ export default class Character {
   }
 
   updateStats() {
-    this.hpMax = 6 + constitution * 2;
+    this.maxHp = 6 + constitution * 2;
     this.encumbrenceMax = 20 + strength * 3;
     this.expNext = 100 + level * 150;
   }
@@ -121,4 +127,50 @@ export default class Character {
       this.isAlive = false;
     }
   }
+
+  heal(amount) {
+    this.currentHp += amount;
+    if (this.currentHp > this.maxHp) {
+      this.currentHp = this.maxHp;
+    }
+  }
 }
+
+const allSpells = [
+  (firebolt = new Spell(
+    "firebolt",
+    1,
+    Type.Instant,
+    0,
+    DamageType.Fire,
+    [5, 10, 20],
+    School.Elemental
+  )),
+  (fireball = new Spell(
+    "fireball",
+    1,
+    Type.Instant,
+    0,
+    DamageType.Fire,
+    [10, 20, 40],
+    School.Elemental
+  )),
+  (mindblast = new Spell(
+    "mindblast",
+    1,
+    Type.Instant,
+    0,
+    DamageType.Chaos,
+    [10, 15, 20],
+    School.Arcane
+  )),
+  (heal = new Spell(
+    "heal",
+    1,
+    Type.Instant,
+    0,
+    DamageType.Heal,
+    [10, 15, 30],
+    School.Arcane
+  )),
+];

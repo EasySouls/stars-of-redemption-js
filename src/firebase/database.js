@@ -1,4 +1,3 @@
-import React from "react";
 import { database } from "./firebase";
 import { set, ref, get } from "firebase/database";
 import Character from "../classes/Character";
@@ -21,6 +20,7 @@ export function saveCharacterData(currentUser, char) {
     wisdom: char.wisdom,
     charisma: char.charisma,
     exp: char.exp,
+    knownSpells: char.knownSpells,
   });
 }
 
@@ -41,11 +41,13 @@ export function loadCharacterFromDatabase(currentUser, index, setCharacter) {
           char.currentHp,
           char.encumbrence,
           char.strength,
+          char.dexterity,
           char.constitution,
           char.intelligence,
           char.wisdom,
           char.charisma,
-          char.exp
+          char.exp,
+          char.knownSpells
         );
         setCharacter(loadedCharacter);
       } else {
@@ -89,6 +91,7 @@ export function loadCurrentCharacter(currentUser, setCharacter) {
               char.wisdom,
               char.charisma,
               char.exp,
+              char.knownSpells,
               false
             );
             setCharacter(currentChar);
@@ -96,7 +99,7 @@ export function loadCurrentCharacter(currentUser, setCharacter) {
           // Return a newly instantiated instance if a previous one wasn't found
           .catch((error) => {
             const newChar = new Character();
-            newChar.hpMax = 0;
+            newChar.maxHp = 0;
             newChar.encumbrenceMax = 0;
             setCharacter(newChar);
           });

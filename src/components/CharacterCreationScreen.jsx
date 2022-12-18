@@ -5,20 +5,6 @@ import { saveCharacterData, saveCurrentCharacter } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
 import Character from "../classes/Character";
 
-const temporaryCharacter = new Character(
-  "",
-  1,
-  0,
-  0,
-  10,
-  10,
-  10,
-  10,
-  10,
-  10,
-  true
-);
-
 export default function CharacterCreationScreen() {
   const [error, setError] = useState(null);
   const [status, setStatus] = useState("typing"); // 'typing', 'submitting' or 'success'
@@ -50,6 +36,7 @@ export default function CharacterCreationScreen() {
         tempChar.wisdom,
         tempChar.charisma,
         0,
+        [firebolt, fireball, mindblast],
         true
       );
       await setCharacter(_character);
@@ -131,3 +118,17 @@ export default function CharacterCreationScreen() {
     );
   }
 }
+
+const temporaryCharacter = new Character(
+  "",
+  1,
+  0,
+  0,
+  10,
+  10,
+  10,
+  10,
+  10,
+  10,
+  true
+);
