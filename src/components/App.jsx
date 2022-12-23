@@ -23,14 +23,9 @@ export const GameStateContext = createContext();
 const initialCharacter = new Character();
 
 function App() {
-  // useLocalStorage custom hook, so the character can be read on a page refresh
-  // const [character, setCharacter] = useLocalStorage(
-  //   "currentCharacter",
-  //   initialCharacter
-  // );
   const [character, setCharacter] = useState(initialCharacter);
 
-  const [gameState, setGameState] = useState("battle");
+  const [gameState, setGameState] = useState("character-creation");
 
   // The game state uses the local storage, so the game would't be
   // reloaded on a page refresh

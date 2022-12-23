@@ -3,7 +3,7 @@ import { CharacterContext, GameStateContext } from "./App";
 import AttributeUpgrade from "./AttributeUpgrade";
 import { saveCharacterData, saveCurrentCharacter } from "../firebase/database";
 import { useAuth } from "../contexts/AuthContext";
-import Character from "../classes/Character";
+import Character, { allSpells } from "../classes/Character";
 
 export default function CharacterCreationScreen() {
   const [error, setError] = useState(null);
@@ -36,7 +36,7 @@ export default function CharacterCreationScreen() {
         tempChar.wisdom,
         tempChar.charisma,
         0,
-        [firebolt, fireball, mindblast],
+        [...allSpells],
         true
       );
       await setCharacter(_character);

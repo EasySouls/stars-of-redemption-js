@@ -27,7 +27,7 @@ export default class Character {
   constructor(
     name = "",
     level = 0,
-    hp = 0,
+    currentHp = 0,
     encumbrence = 0,
     strength = 0,
     dexterity = 0,
@@ -54,10 +54,10 @@ export default class Character {
     this.knownSpells = knownSpells;
 
     if (isFirstTimeInitiated) {
-      this.currentHp = this.hpMax;
+      this.currentHp = 6 + constitution * 2;
       this.encumbrence = 0;
     } else {
-      this.currentHp = hp;
+      this.currentHp = currentHp;
       this.encumbrence = encumbrence;
     }
   }
@@ -65,6 +65,14 @@ export default class Character {
   // Getters
   get damage() {
     return this.calcDamage();
+  }
+
+  get knownSpells() {
+    return this.knownSpells();
+  }
+
+  get allSpells() {
+    return this.allSpells();
   }
 
   // Methods
@@ -136,8 +144,8 @@ export default class Character {
   }
 }
 
-const allSpells = [
-  (firebolt = new Spell(
+export const allSpells = [
+  new Spell(
     "firebolt",
     1,
     Type.Instant,
@@ -145,8 +153,8 @@ const allSpells = [
     DamageType.Fire,
     [5, 10, 20],
     School.Elemental
-  )),
-  (fireball = new Spell(
+  ),
+  new Spell(
     "fireball",
     1,
     Type.Instant,
@@ -154,8 +162,8 @@ const allSpells = [
     DamageType.Fire,
     [10, 20, 40],
     School.Elemental
-  )),
-  (mindblast = new Spell(
+  ),
+  new Spell(
     "mindblast",
     1,
     Type.Instant,
@@ -163,8 +171,8 @@ const allSpells = [
     DamageType.Chaos,
     [10, 15, 20],
     School.Arcane
-  )),
-  (heal = new Spell(
+  ),
+  new Spell(
     "heal",
     1,
     Type.Instant,
@@ -172,5 +180,5 @@ const allSpells = [
     DamageType.Heal,
     [10, 15, 30],
     School.Arcane
-  )),
+  ),
 ];
