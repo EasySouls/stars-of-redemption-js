@@ -33,7 +33,7 @@ export const textNodes = [
   },
   {
     id: 3,
-    text: 'You carefully take the amulet from his neck and observe it. It is made from an alloy of iron and gold. Whoever made it, they must be really skillful - you think, looking at the beautiful shape of the object. Suddenly, you hear a warm, eerie voice in your head. "Hang me around your neck, and we can devour the gods together".',
+    text: 'You carefully take the amulet from his neck and observe it. It is made from an alloy of iron and gold. Whoever made it, they must be really skillful - you think, looking at the beautiful shape of the object. Suddenly, you hear a warm, eerie voice in your head. "Hang me around your neck, and we can devour the satan together".',
     options: [
       {
         text: "Hang the amulet around your neck",
@@ -89,8 +89,12 @@ export const textNodes = [
   },
   {
     id: 8,
-    text: "",
-    options: [{}, {}],
+    text: "after ",
+    options: [{
+      text: "hello",
+      nextText: 9,
+
+    }, {}],
   },
   {
     id: 7,
